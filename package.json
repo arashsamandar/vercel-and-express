@@ -10,8 +10,7 @@
   "author": "Arash Samandar",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2",
-    "mongodb": "^6.5.0"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
