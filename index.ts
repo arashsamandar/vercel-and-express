@@ -6,13 +6,5 @@ app.get('/',(req,res)=>{
 });
 
 app.get('/aarash',(req,res)=>{
-	res.send('hello from aarash route babe');
-});
-
-app.get('/newaddress',(req,res)=>{
-	res.send('new address added to the Vercel arash sir');
-});
-
-app.get('/check',(req,res)=>{
-	res.send('Welcome to the Check Route');
+	res.send('Adding Only Neccesary Routes Like AARASH Route');
 });
