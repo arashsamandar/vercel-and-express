@@ -12,3 +12,6 @@ app.get('/', (req, res) => {
 app.get('/aarash', (req, res) => {
     res.send('Adding Only Neccesary Routes Like AARASH Route');
 });
+app.get('/testing', (req, res) => {
+    res.json({ name: "arash", family: "samandar" }).send();
+});
