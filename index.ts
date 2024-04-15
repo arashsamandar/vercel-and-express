@@ -11,3 +11,7 @@ app.get('/aarash',(req,res)=>{
 app.get('/newaddress',(req,res)=>{
 	res.send('new address added to the Vercel arash sir');
 });
+
+app.get('/check',(req,res)=>{
+	res.send('Welcome to the Check Route');
+});
