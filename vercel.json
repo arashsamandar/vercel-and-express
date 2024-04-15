@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 4.16.1,
   "builds": [
     {
       "src": "dist/index.js",
