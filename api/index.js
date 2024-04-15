@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 
-app.listen(3000,()=>console.log('hello arash'));
 app.get('/',(req,res)=>{
 	res.send('hello arash samandar');
 });
+
+app.get('/aarash',(req,res)=>{
+	res.send('hello from aarash end point');
+})
