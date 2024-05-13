@@ -1,6 +1,10 @@
 import express from 'express';
+import mongodb from 'mongodb';
+
 const app = express();
 app.listen(3000,()=>console.log('application ready to use'));
+
+
 app.get('/',(req,res)=>{
 	res.send("hello aarash samandar from Ts");
 });
