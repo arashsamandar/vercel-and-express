@@ -4,16 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const mongodbConnection_1 = require("./src/mongodbConnection");
 const app = (0, express_1.default)();
+app.use(express_1.default.static('public'));
 app.listen(3000, () => console.log('application ready to use'));
-(0, mongodbConnection_1.main)().catch(console.error);
 app.get('/', (req, res) => {
-    res.send("hello aarash samandar from Ts");
+    res.sendFile('index.html', { root: __dirname + '\\public' });
 });
-app.get('/aarash', (req, res) => {
-    res.send('Adding Only Neccesary Routes Like AARASH Route');
-});
-app.get('/testing', (req, res) => {
-    res.json({ name: "arash", family: "samandar" }).send();
+app.get('/arash', (req, res) => {
+    res.send('hello arash from my new add in Vercel');
 });

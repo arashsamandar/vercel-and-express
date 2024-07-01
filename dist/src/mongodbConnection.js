@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.main = void 0;
+exports.readMongodbUsers = exports.main = void 0;
 const mongodb_1 = require("mongodb");
+const client = new mongodb_1.MongoClient("mongodb://localhost:27017/arashDatabase");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const client = new mongodb_1.MongoClient("mongodb://localhost:27017/arashDatabase/users");
         try {
             yield client.connect();
             console.log("Connected to MongoDB");
@@ -21,9 +21,15 @@ function main() {
         catch (e) {
             console.error(e);
         }
-        finally {
-            yield client.close();
-        }
     });
 }
 exports.main = main;
+function readMongodbUsers() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const db = client.db('arashDatabase');
+        const usersCollection = db.collection('users');
+        const users = usersCollection.find({}).toArray();
+        return users;
+    });
+}
+exports.readMongodbUsers = readMongodbUsers;
