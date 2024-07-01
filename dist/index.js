@@ -8,3 +8,6 @@ app.get('/', (req, res) => {
     res.sendFile('./public/index.html');
 });
 
+app.get('/samandar', (req, res) => {
+    res.send('some bullshits here');
+});
