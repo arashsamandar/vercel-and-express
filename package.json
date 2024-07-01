@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
-    "start": "ts-node-dev index.ts"
+    "start":"node dist/index.js"
   },
   "author": "Arash Samandar",
   "license": "ISC",
