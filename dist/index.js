@@ -8,5 +8,5 @@ const app = (0, express_1.default)();
 app.use(express_1.default.static('public'));
 app.listen(3000, () => console.log('application ready to use'));
 app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: __dirname + '\\public' });
+    res.sendFile('/index.html');
 });
