@@ -7,7 +7,7 @@
     },
     {
       "src": "/frontend/package.json",
-      "use": "react-scripts build"
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
