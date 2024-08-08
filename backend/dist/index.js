@@ -8,7 +8,11 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 app.listen(3000, () => console.log('application ready to use'));
 app.get('/api/helloarash', (req, res) => {
-    res.send(`took ${Date.now() - startTime}ms to respond`);
+    let responseStartTime = Date.now();
+    res.json({
+        totalTime: Date.now() - startTime,
+        responseTime: Date.now() - responseStartTime,
+    });
 });
 app.get('/api/helloarash2', (req, res) => {
     res.send('hello arash this one works On Two 2');
