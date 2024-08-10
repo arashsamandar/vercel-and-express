@@ -1,7 +1,8 @@
 const startTime = Date.now();
-import express from 'express';
 
+import express from 'express';
 const app = express();
+
 app.listen(3000,()=>console.log('application ready to use'));
 
 app.get('/api/helloarash',(req,res)=>{
