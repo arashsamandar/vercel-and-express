@@ -17,3 +17,6 @@ app.get('/api/helloarash', (req, res) => {
 app.get('/api/helloarash2', (req, res) => {
     res.send('hello arash this one works On Two 2');
 });
+app.get('/api/testApplication', (req, res) => {
+    res.send('Application Is Working Gracefully Arash');
+});
