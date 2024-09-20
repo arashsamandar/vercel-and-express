@@ -1,7 +1,7 @@
-import {Router} from "express";
+import express from "express";
 import mongoose from "mongoose";
 
-const mongoRouter = Router();
+const mongoRouter = express.Router();
 
 mongoRouter.get('/someurl',(req,res)=>{
     res.send('database routes');
