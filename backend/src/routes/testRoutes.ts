@@ -1,5 +1,5 @@
 import express from "express";
-import connectToMongoAtlas from "../database/mongodb_atlas";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -13,9 +13,12 @@ router.get('/checkRoute', (req, res)=>{
     })
 });
 
-router.get('/getMongodb', (req, res, next)=>{
+router.get('/getMongodb', async (req, res, next)=>{
     try{
-        connectToMongoAtlas();
+        await mongoose.connect("mongodb+srv://arashinternet:aCowDLeEt3Gf4QWb@cluster0.t1xjibr.mongodb.net/example?retryWrites=true&w=majority&appName=Cluster0");
+        res.json({
+            message:'connection was a success',
+        })
     }catch (error: any){
         next(error);
     }
