@@ -18,3 +18,7 @@ export const waitForDbConnection = (maxRetries = 3, retryInterval = 1000): Promi
         checkConnection();
     });
 };
+
+function someOtherFunction(){
+    return Promise.resolve('some value');
+}
