@@ -4,17 +4,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const testRoutes_1 = __importDefault(require("./src/routes/testRoutes"));
+const error_handling_1 = __importDefault(require("./src/utils/error-handling"));
+const test_routes_1 = __importDefault(require("./src/routes/test-routes"));
+const database_routes_1 = __importDefault(require("./src/routes/database-routes"));
+const mongodb_atlas_1 = __importDefault(require("./src/database/mongodb-atlas"));
 const app = (0, express_1.default)();
+// ----------- middlewares -----------
+app.use(error_handling_1.default);
 app.use(express_1.default.json());
-app.use('/api/tests/', testRoutes_1.default);
-app.get('/api/testApplication', (req, res) => {
-    res.send('Application Is Working Gracefully Arash');
+// ------------ routes -----------
+app.use('/api/tests/', test_routes_1.default);
+app.use('/api/database/', database_routes_1.default);
+app.use((req, res, next) => {
+    res.status(404).send('404 - not found');
 });
-app.use((error, req, res, next) => {
-    res.status(500).json({
-        message: error.message,
-        stack_trace: error.stack
-    });
-});
+// ------------ database -----------
+(0, mongodb_atlas_1.default)();
+// ------------ server listen -----------
 app.listen(3000, () => console.log('application ready to use'));

@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-
 const mongoRouter = express.Router();
 
 mongoRouter.get('/someurl',(req,res)=>{
