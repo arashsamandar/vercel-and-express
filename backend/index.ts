@@ -1,19 +1,25 @@
-import express, { Request, Response, NextFunction } from 'express';
-import router from './src/routes/testRoutes';
-
+import express from 'express';
+import globalErrorHandling from "./src/utils/error-handling";
+import router from './src/routes/test-routes';
+import mongoRouter from "./src/routes/database-routes";
+import connectToMongoAtlas from "./src/database/mongodb-atlas";
 const app = express();
 
+// ----------- middlewares -----------
+
+app.use(globalErrorHandling);
 app.use(express.json());
+
+// ------------ routes -----------
 app.use('/api/tests/', router);
-app.get('/api/testApplication', (req, res)=>{
-	res.send('Application Is Working Gracefully Arash');
+app.use('/database/', mongoRouter);
+
+app.use((req,res,next)=>{
+	res.status(404).send('404 - not found');
 });
 
-app.use((error: any, req: Request, res: Response, next: NextFunction)=>{
-	res.status(500).json({
-		message: error.message,
-		stack_trace: error.stack
-	});
-})
+// ------------ database -----------
+connectToMongoAtlas();
 
+// ------------ server listen -----------
 app.listen(3000,()=>console.log('application ready to use'));
