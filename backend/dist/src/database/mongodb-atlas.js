@@ -13,9 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+const environments_1 = __importDefault(require("../config/environments"));
 function connectToMongoAtlas() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose_1.default.connect("mongodb+srv://arashinternet:aCowDLeEt3Gf4QWb@cluster0.t1xjibr.mongodb.net/example?retryWrites=true&w=majority&appName=Cluster0");
+        yield mongoose_1.default.connect(environments_1.default.MONGODB_ATLAS_URL);
     });
 }
 exports.default = connectToMongoAtlas;

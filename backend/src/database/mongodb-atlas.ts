@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
+import environments from "../config/environments";
 
 export default async function connectToMongoAtlas() {
-    await mongoose.connect("mongodb+srv://arashinternet:aCowDLeEt3Gf4QWb@cluster0.t1xjibr.mongodb.net/example?retryWrites=true&w=majority&appName=Cluster0");
+    await mongoose.connect(environments.MONGODB_ATLAS_URL);
 }
