@@ -1,5 +1,5 @@
 import {React} from 'react';
-import viteLogo from '/vite.svg';
+import viteLogo from '../public/favicon.ico';
 import './App.css';
 
 function App() {
