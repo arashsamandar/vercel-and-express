@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import connectingToMongodb from '../database/mongodb-atlas';
 
-export const waitForDbConnection = (maxRetries = 3, retryInterval = 3500): Promise<void> => {
+export const waitForDbConnection = (maxRetries = 3, retryInterval = 1000): Promise<void> => {
     return new Promise((resolve, reject) => {
         let retries = 0;
 

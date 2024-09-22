@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.waitForDbConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const mongodb_atlas_1 = __importDefault(require("../database/mongodb-atlas"));
-const waitForDbConnection = (maxRetries = 3, retryInterval = 3500) => {
+const waitForDbConnection = (maxRetries = 3, retryInterval = 1000) => {
     return new Promise((resolve, reject) => {
         let retries = 0;
         const checkConnection = () => __awaiter(void 0, void 0, void 0, function* () {

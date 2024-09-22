@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readMongodbUsers = exports.main = void 0;
+exports.main = main;
+exports.readMongodbUsers = readMongodbUsers;
 const mongodb_1 = require("mongodb");
 const client = new mongodb_1.MongoClient("mongodb://localhost:27017/arashDatabase");
 function main() {
@@ -23,7 +24,6 @@ function main() {
         }
     });
 }
-exports.main = main;
 function readMongodbUsers() {
     return __awaiter(this, void 0, void 0, function* () {
         const db = client.db('arashDatabase');
@@ -32,4 +32,3 @@ function readMongodbUsers() {
         return users;
     });
 }
-exports.readMongodbUsers = readMongodbUsers;
