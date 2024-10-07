@@ -7,7 +7,7 @@ export default function Header(){
             <nav className="flex items-center justify-center">
                 <a href="/getbooks" className="absolute left-4 text-2xl font-bold text-white float-left">Laravel Eleven</a>
                 <ul className="flex space-x-4 items-center justify-center">
-                    <CustomLink to="/getbooks" name="Add Books" />
+                    <CustomLink to="/addbooks" name="Add Books" />
                     <CustomLink to="/updatebooks" name="Update Books" />
                     <CustomLink to="/showbooks" name="Show Books" />
                 </ul>
