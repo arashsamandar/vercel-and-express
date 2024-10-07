@@ -1,14 +1,21 @@
-import {React} from 'react';
-import viteLogo from '../public/favicon.ico';
+import * as React from 'react';
 import './App.css';
+import MainLayout from "./layouts/MainLayout.jsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+// import Mainn from "./layouts/mui_layouts/mainn.jsx";
 
-function App() {
-  return (
-    <div className="text-yellow-800">
-      <h1>Hello Arash The Solomon Master Of Programming</h1>
-    </div>
-  )
+export default function App() {
+    return (
+
+        <Routes>
+            <Route path="/" element={<MainLayout/>}>
+                {/*<Route path="/mui" element={<Mainn/>}/>*/}
+                <Route path="/updatebooks" element={<>Update Books Page</>}/>
+                <Route path="/getbooks" element={<>Get Books Page Arash Here</>}/>
+                <Route path="*" element={<>Routes Handled By ReactJs Here</>}/>
+            </Route>
+            <Route path="/materialui" element={<Mainn/>}/>
+        </Routes>
+
+    )
 }
-
-export default App
-// it has been Reverted ( --Hard ) Reset
