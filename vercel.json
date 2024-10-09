@@ -17,8 +17,12 @@
       "dest": "/backend/dist/index.js"
     },
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.(js|json|css|ico|png|jpg|svg))",
       "dest": "/frontend/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/index.html"
     }
   ]
 }
