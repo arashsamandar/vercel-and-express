@@ -1,7 +1,7 @@
 import React from "react";
 import {Button} from "@mui/material";
-import './assets/css/myStyles.css';
-import useFetch from "./tests/utils/useFetch.jsx";
+import '../../assets/css/myStyles.css';
+import useFetch from "./useFetch.jsx";
 
 export default function MyMain() {
 
