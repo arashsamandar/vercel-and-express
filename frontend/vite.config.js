@@ -10,4 +10,10 @@ export default defineConfig({
   build: {
     outDir: 'build', // Change the output directory to 'build'
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './tests/setup.ts', // or .js
+    // you can add more options here
+  }
 })
