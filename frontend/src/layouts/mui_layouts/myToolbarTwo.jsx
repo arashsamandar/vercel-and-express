@@ -26,7 +26,7 @@ export default function MyToolbarTwo() {
         <Box>
             <Button color="inherit" sx={{color: 'black'}}>Login</Button>
             <Button color="inherit" sx={{color: 'black'}}>Register</Button>
-            <Button color="inherit" sx={{color: 'black'}}>Mainn Page</Button>
+            <Button color="inherit" sx={{color: 'black'}}>Mui_Main_Layout Page</Button>
         </Box>
     )
 
@@ -44,7 +44,7 @@ export default function MyToolbarTwo() {
                     <ListItemText primary="Register" />
                 </ListItem>
                 <ListItem button>
-                    <ListItemText primary="Mainn Page"></ListItemText>
+                    <ListItemText primary="Mui_Main_Layout Page"></ListItemText>
                 </ListItem>
             </List>
         </Box>

@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import MyToolbar from "./myToolbar.jsx";
 
-export default function Mainn(){
+export default function Mui_Main_Layout(){
     return (
         <Box sx={{
             backgroundColor: 'gray',
