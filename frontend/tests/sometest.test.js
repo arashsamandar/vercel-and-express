@@ -1,6 +1,9 @@
+import MyTestComponent from "../src/components/test_components/MyTestComponent.jsx";
+import {render} from "@testing-library/react";
 
-describe('does some shitty tests',()=>{
-    it('should be true',()=>{
-        expect(true).toBe(true)
+describe('MyTestComponent', () => {
+    test('renders correctly', () => {
+        render(<MyTestComponent />);
+        expect(1).toBe(1);
     });
-})
+});
