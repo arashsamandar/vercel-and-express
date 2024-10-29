@@ -28,25 +28,25 @@ export default function AddBooksForm() {
     }
 
     return (
-        <form method="POST" onSubmit={submitFormFunction} className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-xl">
+        <form role="form" method="POST" onSubmit={submitFormFunction} className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-xl">
 
             <h2 className="text-3xl font-bold text-center text-white">Contact Us</h2><br/>
 
             <div className="space-y-2">
                 <label htmlFor="name" className="labelsClasses">Name</label>
-                <input type="text" name="name" value={userData.name} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.name ? 'border border-gray-600' : 'border border-red-500'}`} required/>
+                <input type="text" id="name" name="name" value={userData.name} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.name ? 'border border-gray-600' : 'border border-red-500'}`} required={true}/>
             </div>
 
             <div className="space-y-2">
                 <label htmlFor="email" className="labelsClasses">Email</label>
-                <input type="email" name="email" value={userData.email} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.email ? 'border border-gray-600' : 'border border-red-500'}`} required/>
+                <input type="email" id="email" name="email" value={userData.email} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.email ? 'border border-gray-600' : 'border border-red-500'}`} required={true}/>
             </div>
 
             <div className="space-y-2">
                 <label htmlFor="password" className="labelsClasses">Password</label>
                 <div className="flex space-x-4">
-                    <input type="password" name="password" value={userData.password} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.password ? 'border border-gray-600' : 'border border-red-500'}`} required/>
-                    <input type="password" name="password_confirmation" value={userData.password_confirmation} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.password_confirmation ? 'border border-gray-600' : 'border border-red-500'}`} required/>
+                    <input type="password" id="password" name="password" value={userData.password} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.password ? 'border border-gray-600' : 'border border-red-500'}`} required={true}/>
+                    <input type="password" id="password_confirmation" name="password_confirmation" value={userData.password_confirmation} onChange={onFieldChange} className={`textBoxesClasses ${inputIsValid.password_confirmation ? 'border border-gray-600' : 'border border-red-500'}`} placeholder="confirm password" required={true}/>
                 </div>
             </div>
             <br/>
