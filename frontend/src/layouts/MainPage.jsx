@@ -32,7 +32,7 @@ export default function MainPage() {
                 <path d="M0 0 C6.27 0 12.54 0 19 0 C19 17.16 19 34.32 19 52 C12.73 52 6.46 52 0 52 C0 34.84 0 17.68 0 0 Z " fill="#url(#movingGradientt)" transform="translate(307,0)" />
             </svg>
             <br/><br/>
-                <div id="cube-container" style={{marginLeft: "130px"}}>
+                <div id="cube-container" style={{marginLeft: "180px"}}>
                     <div id="front" className="face"></div>
                     <div id="back" className="face"></div>
                     <div id="right" className="face"></div>
