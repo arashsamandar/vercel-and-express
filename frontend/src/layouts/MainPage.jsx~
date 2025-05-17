@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../assets/css/cubeStyles.css';
 import laravel from '../assets/images/laravel4.webp';
-import react from '../assets/images/react2.png';
+import react from '../assets/images/react.png';
 import javascript from '../assets/images/js2.png';
 import nodejs from '../assets/images/nodejs.png';
 import mysql from '../assets/images/mysql.png';
