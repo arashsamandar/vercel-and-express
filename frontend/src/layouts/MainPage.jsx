@@ -1,5 +1,11 @@
 import * as React from 'react';
 import '../assets/css/cubeStyles.css';
+import laravel from '../assets/laravel.png';
+import nodejs from '../assets/nodejs2.png';
+import javascript from '../assets/javascript.png';
+import php from '../assets/php2.png';
+import mysql from '../assets/mysql.png';
+import reactjs from '../assets/reactjs.png';
 
 export default function MainPage() {
     return (
@@ -33,12 +39,12 @@ export default function MainPage() {
             </svg>
             <br/><br/>
                 <div id="cube-container" style={{marginLeft: "180px"}}>
-                    <div id="front" className="face"></div>
-                    <div id="back" className="face"></div>
-                    <div id="right" className="face"></div>
-                    <div id="left" className="face"></div>
-                    <div id="top" className="face"></div>
-                    <div id="bottom" className="face"></div>
+                    <div id="front" className="face"><img src={laravel} alt="Laravel" /></div>
+                    <div id="back" className="face"><img src={mysql} alt="MySQL" /></div>
+                    <div id="right" className="face"><img src={reactjs} alt="ReactJS" /></div>
+                    <div id="left" className="face"><img src={nodejs} alt="NodeJS" /></div>
+                    <div id="top" className="face"><img src={javascript} alt="JavaScript" /></div>
+                    <div id="bottom" className="face"><img src={php} alt="PHP" /></div>
                 </div>
 
         </div>
