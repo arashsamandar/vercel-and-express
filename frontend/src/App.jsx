@@ -18,7 +18,7 @@ export default function App() {
                     <Route path="/updatebooks" element={<UpdateBooksSimpleTransitions />}/>
                     <Route path="/addbooks" element={<AddBooksForm />}/>
                     <Route path="/mui" element={<Mui_Main_Layout/>}/>
-                    <Route path="/showbooks" element={<>Get & Show Books Page Here</>}/>
+                    <Route path="/showbooks" element={<div className="flex flex-col text-center min-h-[90vh] justify-center items-center">Get & Show Books Page Here</div>}/>
                     <Route path="*" element={<NotFound404 />}/>
                 </Route>
                 <Route path="/materialui" element={<Mui_Main_Layout/>}/>

@@ -9,7 +9,7 @@ export default function UpdateBooksSimpleTransitions(){
     }
 
     return(
-        <>
+        <div className="flex flex-col text-center min-h-[90vh] justify-center items-center">
             <form onSubmit={doSomeShit} method="POST" className="w-full max-w-md bg-gray-700 rounded-lg shadow-l h-[250px]">
 
                 <h1 className={`text-xl text-white mt-5 ${myFocus ? 'transition bg-gray-500' : ''}`}>
@@ -26,6 +26,6 @@ export default function UpdateBooksSimpleTransitions(){
                 />
 
             </form>
-        </>
+        </div>
     )
 }

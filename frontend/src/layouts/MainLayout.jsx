@@ -7,7 +7,7 @@ export default function MainLayout() {
     return (
         <div className="flex flex-col min-h-screen">
             <Header/>
-            <main className="flex bg-gradient-to-bl from-sky-500 to-indigo-500 text-center min-h-[90vh] justify-center items-center">
+            <main className="bg-gradient-to-bl from-sky-500 to-indigo-500 min-h-[90vh]">
                 <Outlet />
             </main>
             <Footer/>
