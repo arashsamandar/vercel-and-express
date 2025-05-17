@@ -53,9 +53,9 @@ export default function Header() {
                     </div>
                     <div className="hidden md:block">
                         <ul className="flex space-x-4 items-center">
-                            <CustomLink to="/addbooks" name="Add Books" />
-                            <CustomLink to="/updatebooks" name="Update Books" />
-                            <CustomLink to="/showbooks" name="Show Books" />
+                            <CustomLink to="/aboutMe" name="About Me" />
+                            <CustomLink to="/techStacks" name="Tech stack" />
+                            <CustomLink to="/contactMe" name="Contact" />
                         </ul>
                     </div>
                 </div>

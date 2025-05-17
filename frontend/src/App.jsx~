@@ -11,7 +11,7 @@ import Mui_Main_Layout from "./layouts/mui_layouts/Mui_Main_Layout.jsx";
 
 import AbouteMe from "./components/my_website_components/abouteMe.jsx";
 import ContactMe from "./components/my_website_components/contactMe.jsx";
-import TechStack from "./components/my_website_components/techStack.jsx";
+import techStack from "./components/my_website_components/techStack.jsx";
 
 export default function App() {
     return (
@@ -28,7 +28,7 @@ export default function App() {
 
                     <Route path="/aboutMe" element={<AbouteMe />}/>
                     <Route path="/contactMe" element={<ContactMe />}/>
-                    <Route path="/techStacks" element={<TechStack />}/>
+                    <Route path="/techStacks" element={<techStack />}/>
 
                     <Route path="*" element={<NotFound404 />}/>
                 </Route>
