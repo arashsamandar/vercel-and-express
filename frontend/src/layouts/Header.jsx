@@ -67,9 +67,9 @@ export default function Header() {
                     } transform origin-top transition-all duration-300 ease-in-out absolute left-0 right-0 top-full bg-gray-700 shadow-lg md:hidden`}
                 >
                     <ul className="flex flex-col space-y-2 p-4">
-                        <CustomLink to="/addbooks" name="Add Books" />
-                        <CustomLink to="/updatebooks" name="Update Books" />
-                        <CustomLink to="/showbooks" name="Show Books" />
+                        <CustomLink to="/aboutMe" name="About Me" />
+                        <CustomLink to="/techStacks" name="Tech stack" />
+                        <CustomLink to="/contactMe" name="Contact" />
                     </ul>
                 </div>
             </nav>
