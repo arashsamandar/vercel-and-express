@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 import CustomLink from "./CustomLink.jsx";
 
 export default function Header() {
@@ -9,10 +10,10 @@ export default function Header() {
     };
 
     return (
-        <header className="relative bg-gray-700 drop-shadow-lg text-center">
+        <header className="relative z-20 bg-gray-700 drop-shadow-lg text-center">
             <nav className="p-4">
                 <div className="flex items-center justify-between">
-                    <a href="/">
+                    <Link to="/" name="main page">
                         <svg
                             width="100%"
                             height="auto"
@@ -40,7 +41,7 @@ export default function Header() {
                             <path d="M0 0 C6.6 0 13.2 0 20 0 C20 17.49 20 34.98 20 53 C13.4 53 6.8 53 0 53 C0 35.51 0 18.02 0 0 Z " fill="url(#movingGradient)" transform="translate(1007,0)" />
                             <path d="M0 0 C6.27 0 12.54 0 19 0 C19 17.16 19 34.32 19 52 C12.73 52 6.46 52 0 52 C0 34.84 0 17.68 0 0 Z " fill="url(#movingGradient)" transform="translate(307,0)" />
                         </svg>
-                    </a>
+                    </Link>
                     <div className="md:hidden">
                         <button
                             onClick={toggleMenu}
