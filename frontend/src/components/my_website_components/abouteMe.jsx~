@@ -1,5 +1,4 @@
 import * as React from "react";
-import '../../assets/css/ribbonStyles.css';
 
 export default function AbouteMe() {
     return (
