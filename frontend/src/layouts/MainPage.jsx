@@ -10,7 +10,7 @@ import php from '../assets/images/php.png';
 export default function MainPage() {
     return (
         <>
-            <div className="flex flex-col text-center min-h-[90vh] justify-center items-center">
+            <div className="flex flex-col text-center min-h-[calc(100vh-8rem)] justify-center items-center">
                 <div className="w-1/4 min-w-[350px]">
                     <svg
                         width="100%"
