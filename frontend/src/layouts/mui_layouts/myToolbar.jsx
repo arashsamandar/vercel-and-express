@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import MyIcon from '../../assets/menu.png';
-import Searchh from '../../assets/search.png';
+import SearchIcon from '../../assets/search.png';
 import {useState} from "react";
 import {Drawer, List, ListItem, ListItemText, useMediaQuery} from "@mui/material";
 
@@ -79,7 +79,7 @@ export default function MyToolbar() {
                             InputProps={{
                                 startAdornment: (
                                     <IconButton>
-                                        <img src={Searchh} width="24" height="24"/>
+                                        <img src={SearchIcon} width="24" height="24"/>
                                     </IconButton>
                                 ),
                             }}
