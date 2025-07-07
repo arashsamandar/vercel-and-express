@@ -8,8 +8,9 @@ const PARTICLE_SPEED_FACTOR = 0.5;
 const CONNECTION_DISTANCE = 150;
 const PARTICLE_COLOR = 'rgba(191, 219, 254, 0.8)'; // Tailwind blue-200 with opacity
 const LINE_COLOR = 'rgba(147, 197, 253, 0.3)';    // Tailwind blue-300 with opacity
-const MIN_PARTICLES = 100;
-const MAX_PARTICLES = 160;
+const MIN_PARTICLES = window.innerWidth < 768 ? 50 : 100;
+const MAX_PARTICLES = window.innerWidth < 768 ? 80 : 160;
+
 const PARTICLES_PER_SQ_PIXEL = 15000;
 
 class Particle {
