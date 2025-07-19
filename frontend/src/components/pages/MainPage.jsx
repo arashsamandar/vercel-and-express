@@ -1,20 +1,20 @@
 
 import React, { useRef, useEffect, useState } from 'react';
-import '../assets/css/cubeStyles.css';
-import laravel from '../assets/images/laravel4.webp';
-import react from '../assets/images/react2.png';
-import javascript from '../assets/images/js2.png';
-import nodejs from '../assets/images/nodejs.png';
-import mysql from '../assets/images/mysql.png';
-import php from '../assets/images/php.png';
+import '../../assets/css/cubeStyles.css';
+import laravel from '../../assets/images/laravel4.webp';
+import react from '../../assets/images/react2.png';
+import javascript from '../../assets/images/js2.png';
+import nodejs from '../../assets/images/nodejs.png';
+import mysql from '../../assets/images/mysql.png';
+import php from '../../assets/images/php.png';
 
 const PARTICLE_RADIUS = 2.5;
 const PARTICLE_SPEED_FACTOR = 0.5;
 const CONNECTION_DISTANCE = 200;
 const PARTICLE_COLOR = 'rgba(191, 219, 254, 0.8)'; // Tailwind blue-200 with opacity
 const LINE_COLOR = 'rgba(147, 197, 253, 0.3)';    // Tailwind blue-300 with opacity
-const MIN_PARTICLES = 100;
-const MAX_PARTICLES = 200;
+const MIN_PARTICLES = window.innerWidth < 768 ? 35 : 60;
+const MAX_PARTICLES = window.innerWidth < 768 ? 100 : 200;
 const PARTICLES_PER_SQ_PIXEL = 15000;
 
 class Particle {
