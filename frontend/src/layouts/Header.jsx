@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import {Link} from "react-router-dom";
 import CustomLink from "./CustomLink.jsx";
 
-export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+export default function Header({ isMenuOpen, toggleMenu }) {
 
     return (
         <header className="relative z-20 bg-gray-700 drop-shadow-lg text-center">
