@@ -8,7 +8,7 @@ export default function AboutMe_main() {
                 also see my Resume
             </h2>
             <br/>
-            <h3 className="text-lg">
+            <h3 className="text-lg z-10">
                 will be filled soon
             </h3>
         </div>
