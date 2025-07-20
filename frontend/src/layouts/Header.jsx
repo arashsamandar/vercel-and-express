@@ -63,9 +63,9 @@ export default function Header({ isMenuOpen, toggleMenu }) {
                     } transform origin-top transition-all duration-300 ease-in-out absolute left-0 right-0 top-full bg-gray-700 shadow-lg md:hidden`}
                 >
                     <ul className="flex flex-col space-y-2 p-4">
-                        <CustomLink to="/aboutMe" name="About Me" />
-                        <CustomLink to="/techStacks" name="Tech stack" />
-                        <CustomLink to="/contactMe" name="Contact" />
+                        <CustomLink to="/aboutMe" name="About Me" toggleMenu={toggleMenu} />
+                        <CustomLink to="/techStacks" name="Tech stack" toggleMenu={toggleMenu} />
+                        <CustomLink to="/contactMe" name="Contact" toggleMenu={toggleMenu} />
                     </ul>
                 </div>
             </nav>
