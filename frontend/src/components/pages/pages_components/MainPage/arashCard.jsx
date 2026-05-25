@@ -66,7 +66,7 @@ export default function ArashCard() {
                     </div>
 
                     {/* CONTACT SECTION */}
-                    <div className={`card-section ${activeTab === "#contact" ? "is-active" : ""}`} id="contact">
+                    <div className={`card-section p-7 ${activeTab === "#contact" ? "is-active" : ""}`} id="contact">
                         <div className="card-content">
                             <div className="card-subtitle">CONTACT</div>
                             <div className="card-contact-wrapper">
