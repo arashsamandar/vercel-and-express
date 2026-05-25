@@ -35,9 +35,9 @@ export default function MainPageLogo({svgOpacity, ip}) {
                 <div className="ml-5 w-full min-h-[400px] min-w-[600px] pointer-events-auto">
                     <CubeText svgOpacity={svgOpacity}/>
                 </div>
-                <NameTag svgOpacity={svgOpacity} classNames="hidden md:block"/>
+                {/*<NameTag svgOpacity={svgOpacity} classNames="hidden md:block"/>*/}
             </div>
-            <NameTag svgOpacity={svgOpacity} classNames="block md:hidden"/>
+            {/*<NameTag svgOpacity={svgOpacity} classNames="block md:hidden"/>*/}
         </div>
     );
 }
