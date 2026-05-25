@@ -23,7 +23,7 @@ export default function ArashCard() {
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMT4Fx7Zpq0mhz8GqtUC2nX_6-x1EZKvdQOQ&s"
                         alt="avatar"
                     />
-                    <h1 className="card-fullname">Arash ( Ikenna Oyekwe )</h1>
+                    <h1 className="card-fullname">Arash Aghashahi</h1>
                     <h2 className="card-jobtitle">Web Developer</h2>
                 </div>
 
@@ -33,7 +33,7 @@ export default function ArashCard() {
                         <div className="card-content">
                             <div className="card-subtitle">ABOUT</div>
                             <p className="card-desc">
-                                Hi, my name is Ikenna, I started programming when I was 13, by developing a Windows desktop application with (ActionScript & Flash) that I wrote for promoting and advertising a multi-level marketing company. my diploma is in math-physics. after high school, I followed my education in "Computer Software Engineering". After two years of college and writing some programs with Pascal, "C++" & "Visual C++", I came to know the "Chairman of the High Council of IT". While working for him I was very much focused on my career as a programmer and software developer, so I left my college in 2rd year. I continued cooperating with him for 8 yrs, during these years, I learned and worked with several other programming languages and frameworks and even some CMSs. creating websites with C# Asp.Net, writing modules for old Microsoft Cms ( Dotnetnuke ), to making sites with WordPress Cms ( and creating skin for this cms ), to being a "Full Stack Web Developer" Developing web applications with Php, to Developing in MVC paradigm with PHP framework "Laravel" as Back-end & React.js as Front-End.
+                                Hi, my name is Arash, I started programming when I was 13, by developing a Windows desktop application with (ActionScript & Flash) that I wrote for promoting and advertising a multi-level marketing company. my diploma is in math-physics. after high school, I followed my education in "Computer Software Engineering". After two years of college and writing some programs with Pascal, "C++" & "Visual C++", I came to know the "Chairman of the High Council of IT". While working for him I was very much focused on my career as a programmer and software developer, so I left my college in 2rd year. I continued cooperating with him for 8 yrs, during these years, I learned and worked with several other programming languages and frameworks and even some CMSs. creating websites with C# Asp.Net, writing modules for old Microsoft Cms ( Dotnetnuke ), to making sites with WordPress Cms ( and creating skin for this cms ), to being a "Full Stack Web Developer" Developing web applications with Php, to Developing in MVC paradigm with PHP framework "Laravel" as Back-end & React.js as Front-End.
                             </p>
                         </div>
                         <div className="card-social">
@@ -71,13 +71,8 @@ export default function ArashCard() {
                             <div className="card-subtitle">CONTACT</div>
                             <div className="card-contact-wrapper">
                                 <div className="card-contact">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                                    Unity Street zone 4 Dutse
-                                    Abuja, Nigeria
-                                </div>
-                                <div className="card-contact">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                                    (234) 905-021-5391
+                                    (0098) 912-736-4767
                                 </div>
                                 <div className="card-contact">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
