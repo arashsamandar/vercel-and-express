@@ -20,7 +20,7 @@ export function useIp() {
                 .then(res => res.json())
                 .catch(err => {
                     console.error("External Geo fetch failed", err);
-                    return { latitude: 33, longitude: 54, country_name: "Iran", city: "Tehran" }; // Fallback
+                    return { latitude: 51, longitude: 41, country_name: "Location", city: "Is Unknown" }; // Fallback
                 });
             const data = {
                 ip: json1?.ip ?? "0.0.0.0",
