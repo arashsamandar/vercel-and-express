@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "../../../../assets/sass/arashCard.scss";
 
-export default function ArashCard() {
+export default function ArashCard({svgOpacity}) {
     const [activeTab, setActiveTab] = useState("#about");
 
     return (
-        <div className="card-wrapper pointer-events-auto z-30">
+        <div className={`card-wrapper pointer-events-auto z-30 ${svgOpacity === 1 ? "hidden" : " "}`}>
             <div
                 className={`card ${activeTab !== "#about" ? "is-active" : ""}`}
                 data-state={activeTab}
