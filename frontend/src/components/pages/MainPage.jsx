@@ -25,7 +25,7 @@ export default function MainPage() {
             </div>
             <div className="flex justify-center pointer-events-auto">
                 <div className="h-[1000px] z-10 pointer-events-auto">
-                    {waveLoaded && <ArashCard svgOpacity={svgOpacity}/>}
+                    {waveLoaded && <ArashCard/>}
                 </div>
             </div>
             <MovingWave scrollState={100 - (svgOpacity * 100)} onComplete={()=>setWaveLoaded(true)} />
