@@ -1,4 +1,5 @@
 import {useCallback, useEffect, useRef, useState} from "react";
+import {ipData} from "../../../utils/ipData.js";
 import {isMobile} from "react-device-detect";
 
 export function useIp() {
@@ -6,8 +7,14 @@ export function useIp() {
 
     useEffect(() => {
         const fetchIp = async () => {
+            if(ipData.data) {
+                setIp(ipData.data);
+                return;
+            }
+            console.log("fetch ip started again");
             if(localStorage.getItem("PC_ID") === "771a4fc0-c417-4800-a64d-d0558abf0993") {
-                setIp({message: "Localhost was Detected", latitude: 33, longitude: 54, country_name: "Localhost", city: "Salamander Home", ip: "127.0.0.1"});
+                ipData.data = {message: "Localhost was Detected", latitude: 33, longitude: 54, country_name: "Localhost", city: "Salamander Home", ip: "127.0.0.1"};
+                setIp(ipData.data);
                 return;
             }
             const json1 = await fetch("/api/tests/getIp")
@@ -22,14 +29,14 @@ export function useIp() {
                     console.error("External Geo fetch failed", err);
                     return { latitude: 51, longitude: 41, country_name: "Location", city: "Is Unknown" }; // Fallback
                 });
-            const data = {
+            ipData.data = {
                 ip: json1?.ip ?? "0.0.0.0",
                 latitude: json2?.latitude ?? 51,
                 longitude: json2?.longitude ?? 41,
                 country_name: json2?.country_name ?? "Unknown",
                 city: json2?.city ?? "Unknown",
             };
-            setIp(data);
+            setIp(ipData.data);
         }
         fetchIp();
     }, []);
