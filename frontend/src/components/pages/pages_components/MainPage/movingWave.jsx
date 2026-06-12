@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { init, useInitialize_andUpdate_wave, useUpdateOnScroll } from "../../../../assets/js/mainPage/movingWaves.js";
+import React from "react";
+import { useInitialize_andUpdate_wave, useUpdateOnScroll } from "../../../../assets/js/mainPage/movingWaves.js";
 
 // Accepts scrollState as a prop (number 0 to 100)
 export default function MovingWave({ scrollState = 0, onComplete }) {
