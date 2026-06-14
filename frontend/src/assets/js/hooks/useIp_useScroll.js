@@ -1,6 +1,5 @@
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {ipData} from "../../../utils/ipData.js";
-import {isMobile} from "react-device-detect";
 
 export function useIp() {
     const [ip, setIp] = useState({});
@@ -66,13 +65,13 @@ export function useScroll() {
 }
 
 
-export function mobileAdjustCallBack(){
-    return useCallback((node) => {
-        if(!node) return;
-        if(node.id === 'lyrics'){
-            isMobile ? node.classList.add('max-w-[70vw]') : node.classList.add('max-w-[48vw]');
-        }
-        if(node.id === 'svgImage')
-            isMobile ? node.classList.add('mt-44') : node.classList.remove('mt-44');
-    },[]);
-}
+// export function mobileAdjustCallBack(){
+//     return useCallback((node) => {
+//         if(!node) return;
+//         if(node.id === 'lyrics'){
+//             isMobile ? node.classList.add('max-w-[70vw]') : node.classList.add('max-w-[48vw]');
+//         }
+//         if(node.id === 'svgImage')
+//             isMobile ? node.classList.add('mt-44') : node.classList.remove('mt-44');
+//     },[]);
+// }
