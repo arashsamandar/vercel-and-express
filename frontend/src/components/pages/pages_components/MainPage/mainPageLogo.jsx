@@ -1,5 +1,5 @@
 import React, {lazy, Suspense} from "react";
-const SvgGlobe = lazy(() => import('./svgGlobe'));
+const SvgGlobe = lazy(()=> import("./svgGlobe.jsx"))
 import CubeText from "./cubeText.jsx";
 import Svg_Image_MainPage from "./svg_image_mainpage.jsx";
 import useScreenSize from "../../../../assets/js/hooks/useScreenSize.js";
@@ -24,7 +24,9 @@ export default function MainPageLogo({svgOpacity, ip}) {
                 <div className="ml-5 w-full min-h-[400px] min-w-[600px] pointer-events-auto">
                     <CubeText svgOpacity={svgOpacity}/>
                 </div>
+                {/*<NameTag svgOpacity={svgOpacity} classNames="hidden md:block"/>*/}
             </div>
+            {/*<NameTag svgOpacity={svgOpacity} classNames="block md:hidden"/>*/}
         </div>
     );
 }
