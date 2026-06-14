@@ -4,13 +4,14 @@ import CubeText from "./cubeText.jsx";
 import Svg_Image_MainPage from "./svg_image_mainpage.jsx";
 import useScreenSize from "../../../../assets/js/hooks/useScreenSize.js";
 import "../../../../assets/sass/globeContainer.sass";
+import Rotating_Icons_Two from "../../../../utils/rotating_icons_two.jsx";
 
 export default function MainPageLogo({svgOpacity, ip}) {
     const screenWidth = useScreenSize();
 
     return (
         <div className="relative w-full mt-[25vh] pointer-events-none">
-            <div style={{opacity: svgOpacity}} className={`globe-container ${svgOpacity === 1 ? "" : "globe-hidden"} relative pointer-events-auto`}>
+            <div style={{opacity: svgOpacity}} className="globe-container relative pointer-events-auto">
                 {
                     screenWidth > 1500 ? (
                         <Suspense fallback={null}>
@@ -20,13 +21,14 @@ export default function MainPageLogo({svgOpacity, ip}) {
                 }
             </div>
             <Svg_Image_MainPage svgOpacity={svgOpacity} className="w-full h-full pointer-events-none"/>
-            <div className="w-full flex justify-center select-none">
-                <div className="ml-5 w-full min-h-[400px] min-w-[600px] pointer-events-auto">
+            <div className="w-full flex align-middle items-center justify-center select-none">
+                <div className="ml-5 w-full min-h-[80px] min-w-[600px] pointer-events-auto">
                     <CubeText svgOpacity={svgOpacity}/>
                 </div>
-                {/*<NameTag svgOpacity={svgOpacity} classNames="hidden md:block"/>*/}
             </div>
-            {/*<NameTag svgOpacity={svgOpacity} classNames="block md:hidden"/>*/}
+            <div className="flex justify-center mb-[80px] pointer-events-auto cursor-pointer">
+                <Rotating_Icons_Two/>
+            </div>
         </div>
     );
 }

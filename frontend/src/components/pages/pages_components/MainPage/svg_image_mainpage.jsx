@@ -1,4 +1,5 @@
 import React from "react";
+import Rotating_Icons_Two from "../../../../utils/rotating_icons_two.jsx";
 
 export default function Svg_Image_MainPage({svgOpacity}) {
     return (
@@ -55,7 +56,6 @@ export default function Svg_Image_MainPage({svgOpacity}) {
                     d="M0 0 C6.27 0 12.54 0 19 0 C19 17.16 19 34.32 19 52 C12.73 52 6.46 52 0 52 C0 34.84 0 17.68 0 0 Z "
                     fill="#url(#movingGradientt)" transform="translate(307,0)"/>
             </svg>
-
         </>
     )
 }
