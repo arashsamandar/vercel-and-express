@@ -4,7 +4,6 @@ import CubeText from "./cubeText.jsx";
 import Svg_Image_MainPage from "./svg_image_mainpage.jsx";
 import useScreenSize from "../../../hooks/useScreenSize.js";
 import "../../../assets/sass/globeContainer.sass";
-import Rotating_Icons_Two from "../../../utils/rotating_icons_two.jsx";
 
 export default function MainPageLogo({svgOpacity, ip}) {
     const screenWidth = useScreenSize();
@@ -22,12 +21,9 @@ export default function MainPageLogo({svgOpacity, ip}) {
             </div>
             <Svg_Image_MainPage svgOpacity={svgOpacity} className="w-full h-full pointer-events-none"/>
             <div className="w-full flex align-middle items-center justify-center select-none">
-                <div className="ml-5 w-full min-h-[80px] min-w-[600px] pointer-events-auto [@media(min-width:860px)_and_(max-width:1800px)]:mr-[100px]">
+                <div className="ml-5 w-full min-h-[400px] min-w-[600px] pointer-events-auto [@media(min-width:860px)_and_(max-width:1800px)]:mr-[100px]">
                     <CubeText svgOpacity={svgOpacity}/>
                 </div>
-            </div>
-            <div className="flex justify-center mb-[80px] pointer-events-auto cursor-pointer">
-                <Rotating_Icons_Two/>
             </div>
         </div>
     );
