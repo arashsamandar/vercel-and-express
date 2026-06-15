@@ -8,39 +8,42 @@ const Rotating_Icons_Two = () => {
         if (!containerRef.current) return;
 
         const icons = [
-            { img: 'https://cdn.simpleicons.org/react/61DAFB', name: 'React' },
-            { img: 'https://cdn.simpleicons.org/javascript/F7DF1E', name: 'JavaScript' },
-            { img: 'https://cdn.simpleicons.org/css/1572B6', name: 'CSS' },
-            { img: 'https://cdn.simpleicons.org/html5/E34F26', name: 'HTML' },
-            { img: 'https://cdn.simpleicons.org/nodedotjs/339933', name: 'Node.js' },
-            { img: 'https://cdn.simpleicons.org/laravel/3776AB', name: 'Laravel' },
-            { img: 'https://cdn.simpleicons.org/git/F05032', name: 'Git' },
-            { img: 'https://cdn.simpleicons.org/docker/2496ED', name: 'Docker' },
-            { img: 'https://cdn.simpleicons.org/supabase/FF9900', name: 'Java' },
-            { img: 'https://cdn.simpleicons.org/postgresql/4169E1', name: 'PostgreSQL' },
-            { img: 'https://cdn.simpleicons.org/typescript/3178C6', name: 'TypeScript' },
-            { img: 'https://cdn.simpleicons.org/mongodb/4FC08D', name: 'MongoDB' },
-            { img: 'https://cdn.simpleicons.org/nextdotjs/000000', name: 'Next.js' },
-            { img: 'https://cdn.simpleicons.org/php/000000', name: 'Php' },
-            { img: 'https://cdn.simpleicons.org/firebase/FFCA28', name: 'Firebase' },
+            { img: 'https://cdn.simpleicons.org/react/61DAFB',       name: 'React'       },
+            { img: 'https://cdn.simpleicons.org/javascript/F7DF1E',   name: 'JavaScript'  },
+            { img: 'https://cdn.simpleicons.org/css/1572B6',          name: 'CSS'         },
+            { img: 'https://cdn.simpleicons.org/html5/E34F26',        name: 'HTML'        },
+            { img: 'https://cdn.simpleicons.org/nodedotjs/339933',    name: 'Node.js'     },
+            { img: 'https://cdn.simpleicons.org/laravel/FF2D20',      name: 'Laravel'     },
+            { img: 'https://cdn.simpleicons.org/git/F05032',          name: 'Git'         },
+            { img: 'https://cdn.simpleicons.org/docker/2496ED',       name: 'Docker'      },
+            { img: 'https://cdn.simpleicons.org/supabase/3ECF8E',     name: 'Supabase'    },
+            { img: 'https://cdn.simpleicons.org/postgresql/4169E1',   name: 'PostgreSQL'  },
+            { img: 'https://cdn.simpleicons.org/typescript/3178C6',   name: 'TypeScript'  },
+            { img: 'https://cdn.simpleicons.org/mongodb/47A248',      name: 'MongoDB'     },
+            { img: 'https://cdn.simpleicons.org/nextdotjs/FFFFFF',    name: 'Next.js'     },
+            { img: 'https://cdn.simpleicons.org/php/777BB4',          name: 'PHP'         },
+            { img: 'https://cdn.simpleicons.org/firebase/FFCA28',     name: 'Firebase'    },
         ];
 
         const container = containerRef.current;
-        let radius = 300;
-        if(window.innerWidth < 600){
-            radius = 180;
-        }
+        const radius = window.innerWidth < 600 ? 150 : 260;
 
-        let angleX = 0;        // mouse offset X (smoothed)
-        let angleY = 0;        // mouse offset Y (smoothed)
-        let targetAngleX = 0;  // raw mouse target X
-        let targetAngleY = 0;  // raw mouse target Y
-        let autoRotateY = 0;   // accumulated auto-rotation Y
-        let autoRotateX = 0;   // accumulated auto-rotation X
+        // Base rotation — accumulates during auto-spin while mouse is away
+        let rotX = 0;
+        let rotY = 0;
 
-        // Build icon elements using Fibonacci sphere distribution
+        // Mouse offset — layered on top of base rotation while hovering.
+        // On mouse leave, absorbed into rotX/rotY so the sphere never jumps.
+        let offsetX = 0;
+        let offsetY = 0;
+        let targetOffsetX = 0;
+        let targetOffsetY = 0;
+
+        let isHovered = false;
+
+        // ── Build icon elements (Fibonacci sphere distribution) ───────────────
         icons.forEach((icon, i) => {
-            const phi = Math.acos(1 - 2 * (i + 0.5) / icons.length);
+            const phi   = Math.acos(1 - 2 * (i + 0.5) / icons.length);
             const theta = Math.PI * (1 + Math.sqrt(5)) * i;
 
             const iconEl = document.createElement('div');
@@ -51,88 +54,95 @@ const Rotating_Icons_Two = () => {
                     <span class="icon-label">${icon.name}</span>
                 </div>
             `;
-            iconEl.dataset.phi = phi;
+            iconEl.dataset.phi   = phi;
             iconEl.dataset.theta = theta;
             container.appendChild(iconEl);
             iconsRef.current.push(iconEl);
         });
 
-        const updatePositions = () => {
-            const rotY = autoRotateY + angleY;
-            const rotX = autoRotateX + angleX;
-
+        // ── Position all icons given total rotation rx, ry ────────────────────
+        const updatePositions = (rx, ry) => {
             iconsRef.current.forEach((iconEl) => {
-                const phi = parseFloat(iconEl.dataset.phi);
+                const phi   = parseFloat(iconEl.dataset.phi);
                 const theta = parseFloat(iconEl.dataset.theta);
 
-                // FIX 2: Base 3D position on unit sphere
                 const x0 = radius * Math.sin(phi) * Math.cos(theta);
                 const y0 = radius * Math.cos(phi);
                 const z0 = radius * Math.sin(phi) * Math.sin(theta);
 
-                // FIX 2: Apply Y-axis rotation matrix
-                const x1 = x0 * Math.cos(rotY) + z0 * Math.sin(rotY);
-                const y1 = y0;
-                const z1 = -x0 * Math.sin(rotY) + z0 * Math.cos(rotY);
+                // Y-axis rotation (left / right)
+                const x1 =  x0 * Math.cos(ry) + z0 * Math.sin(ry);
+                const y1 =  y0;
+                const z1 = -x0 * Math.sin(ry) + z0 * Math.cos(ry);
 
-                // FIX 2: Apply X-axis rotation matrix
-                const x2 = x1;
-                const y2 = y1 * Math.cos(rotX) - z1 * Math.sin(rotX);
-                const z2 = y1 * Math.sin(rotX) + z1 * Math.cos(rotX);
+                // X-axis rotation (up / down)
+                const x2 =  x1;
+                const y2 =  y1 * Math.cos(rx) - z1 * Math.sin(rx);
+                const z2 =  y1 * Math.sin(rx) + z1 * Math.cos(rx);
 
-                // Normalize depth to [0, 1]
-                const depthNorm = (z2 + radius) / (radius * 2);
-
-                const scale = 0.4 + depthNorm * 0.8;
-                const opacity = 0.2 + depthNorm * 0.8;
+                const depthNorm = (z2 + radius) / (radius * 2); // 0 = back, 1 = front
+                const scale     = 0.35 + depthNorm * 0.85;
+                const opacity   = 0.15 + depthNorm * 0.85;
 
                 iconEl.style.transform = `translate(-50%, -50%) translate(${x2}px, ${y2}px) scale(${scale})`;
-                iconEl.style.opacity = opacity;
-                iconEl.style.zIndex = Math.floor(depthNorm * 100);
+                iconEl.style.opacity   = opacity;
+                iconEl.style.zIndex    = Math.floor(depthNorm * 100);
             });
         };
 
-        let isMouseOver = false;
-
+        // ── Event handlers ────────────────────────────────────────────────────
         const handleMouseMove = (e) => {
-            if (!isMouseOver) return;
-            const rect = container.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            targetAngleY = ((e.clientX - centerX) / (rect.width / 2)) * 1.2;
-            targetAngleX = ((e.clientY - centerY) / (rect.height / 2)) * 1.2;
+            const rect    = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width  / 2;
+            const centerY = rect.top  + rect.height / 2;
+            // Mouse position maps directly to sphere orientation offset
+            targetOffsetY = ((e.clientX - centerX) / (rect.width  / 2)) * 1.5;
+            targetOffsetX = ((e.clientY - centerY) / (rect.height / 2)) * 1.5;
         };
 
-        const handleMouseEnter = () => { isMouseOver = true; };
+        const handleMouseEnter = () => { isHovered = true; };
 
         const handleMouseLeave = () => {
-            isMouseOver = false;
-            targetAngleX = 0;
-            targetAngleY = 0;
+            isHovered = false;
+            // KEY: absorb current offset into the base rotation.
+            // (rotX + offsetX) stays identical at this exact moment,
+            // so the sphere holds its position and auto-spin resumes
+            // from exactly there — no reversal, no shock.
+            rotX += offsetX;
+            rotY += offsetY;
+            offsetX       = 0;
+            offsetY       = 0;
+            targetOffsetX = 0;
+            targetOffsetY = 0;
         };
 
-        // FIX 1: Actually attach the listeners — these were defined but never added
-        window.addEventListener('mousemove', handleMouseMove);
+        container.addEventListener('mousemove',  handleMouseMove);
         container.addEventListener('mouseenter', handleMouseEnter);
         container.addEventListener('mouseleave', handleMouseLeave);
 
+        // ── Animation loop ────────────────────────────────────────────────────
         let animationId;
         const animate = () => {
-            autoRotateY += 0.008;
-            autoRotateX += 0.003;
+            // Auto-spin only while the mouse is away.
+            // Pausing it on hover means left/right and up/down offsets
+            // are equally visible — neither fights the auto-rotation.
+            if (!isHovered) {
+                rotY += 0.008;
+                rotX += 0.003;
+            }
 
-            // Smooth interpolation toward mouse target
-            angleX += (targetAngleX - angleX) * 0.05;
-            angleY += (targetAngleY - angleY) * 0.05;
+            // Smoothly follow the mouse target
+            offsetX += (targetOffsetX - offsetX) * 0.05;
+            offsetY += (targetOffsetY - offsetY) * 0.05;
 
-            updatePositions();
+            updatePositions(rotX + offsetX, rotY + offsetY);
             animationId = requestAnimationFrame(animate);
         };
 
         animate();
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
+            container.removeEventListener('mousemove',  handleMouseMove);
             container.removeEventListener('mouseenter', handleMouseEnter);
             container.removeEventListener('mouseleave', handleMouseLeave);
             cancelAnimationFrame(animationId);
@@ -142,12 +152,10 @@ const Rotating_Icons_Two = () => {
     }, []);
 
     return (
-        // FIX 3: Added `relative w-full` — container needs position:relative for absolute
-        //         children, and a defined width so rect.width isn't 0 in the mouse handler
-        <div className="flex w-screen justify-center z-10">
+        <div className="flex w-[500px] justify-center z-10">
             <div
                 ref={containerRef}
-                className="relative w-full h-[500px]"
+                className="relative w-full h-[600px]"
             />
             <style jsx>{`
                 .icon-item {
