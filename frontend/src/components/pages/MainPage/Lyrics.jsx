@@ -62,7 +62,13 @@ export default function Lyrics({ svgOpacity, ip }) {
         const currentFps = fpsRef.current;
         const fpsText = currentFps > 0 ? `${currentFps} Frame/Sec` : "Measuring Fps ...";
 
-        const textToAnimate = `${ip.ip}\n${ip.country_name} ${ip.city || ''}\n${fpsText} ${window.navigator.hardwareConcurrency}Core ${window.navigator.deviceMemory}GB\nWelcome `;
+        let cores = (typeof window.navigator.hardwareConcurrency !== "undefined") ? window.navigator.hardwareConcurrency + "Core" : "";
+        let memory = (typeof window.navigator.deviceMemory !== "undefined") ? window.navigator.deviceMemory + "GB" : "";
+        if(memory === "" && window.navigator.userAgentData){
+            memory = window.navigator.userAgentData.brands.map(b => `${b.brand} ${b.version}`).join(", ");
+        }
+
+        const textToAnimate = `${ip.ip}\n${ip.country_name} ${ip.city || ''}\n${fpsText} ${cores} ${memory}\nWelcome `;
         messageRef.current.innerHTML = formatText(textToAnimate);
     };
 
