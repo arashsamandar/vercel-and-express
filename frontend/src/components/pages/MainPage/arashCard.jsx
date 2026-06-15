@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../../../assets/sass/arashCard.scss";
+import "../../../assets/sass/arashCard.scss";
 
 export default function ArashCard({svgOpacity}) {
     const [activeTab, setActiveTab] = useState("#about");

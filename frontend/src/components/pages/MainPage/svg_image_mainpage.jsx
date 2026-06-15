@@ -1,5 +1,5 @@
 import React from "react";
-import Rotating_Icons_Two from "../../../../utils/rotating_icons_two.jsx";
+import Rotating_Icons_Two from "../../../utils/rotating_icons_two.jsx";
 
 export default function Svg_Image_MainPage({svgOpacity}) {
     return (

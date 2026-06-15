@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../../../assets/sass/cubeText.sass";
+import "../../../assets/sass/cubeText.sass";
 
 const PHRASES = [
     ["Senior FullStack Developer"],

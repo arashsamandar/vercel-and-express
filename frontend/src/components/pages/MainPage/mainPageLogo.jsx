@@ -2,9 +2,9 @@ import React, {lazy, Suspense} from "react";
 const SvgGlobe = lazy(()=> import("./svgGlobe.jsx"))
 import CubeText from "./cubeText.jsx";
 import Svg_Image_MainPage from "./svg_image_mainpage.jsx";
-import useScreenSize from "../../../../assets/js/hooks/useScreenSize.js";
-import "../../../../assets/sass/globeContainer.sass";
-import Rotating_Icons_Two from "../../../../utils/rotating_icons_two.jsx";
+import useScreenSize from "../../../hooks/useScreenSize.js";
+import "../../../assets/sass/globeContainer.sass";
+import Rotating_Icons_Two from "../../../utils/rotating_icons_two.jsx";
 
 export default function MainPageLogo({svgOpacity, ip}) {
     const screenWidth = useScreenSize();

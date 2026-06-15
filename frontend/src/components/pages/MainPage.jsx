@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import useInitParticles from "../../assets/js/mainPage/Particles.js";
-import {useScroll, useIp} from "../../assets/js/hooks/useIp_useScroll.js";
-import MainPageLogo from "./pages_components/MainPage/mainPageLogo.jsx";
-import MovingWave from "./pages_components/MainPage/movingWave.jsx";
-import Lyrics from "./pages_components/MainPage/Lyrics.jsx";
-import ArashCard from "./pages_components/MainPage/arashCard.jsx";
+import useScroll from "../../hooks/useScroll.js";
+import useIp from "../../hooks/useIp.js";
+import MainPageLogo from "./MainPage/mainPageLogo.jsx";
+import MovingWave from "./MainPage/movingWave.jsx";
+import Lyrics from "./MainPage/Lyrics.jsx";
+import ArashCard from "./MainPage/arashCard.jsx";
 
 export default function MainPage() {
     const [waveLoaded, setWaveLoaded] = useState(false);

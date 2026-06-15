@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../../../../assets/sass/lyrics.scss";
+import "../../../assets/sass/lyrics.scss";
 
 export default function Lyrics({ svgOpacity, ip }) {
     const [isLowEnd, setIsLowEnd] = useState(false);
