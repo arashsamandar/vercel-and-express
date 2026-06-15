@@ -1,5 +1,7 @@
 import {motion} from "framer-motion";
 import {pageVariants, pageTransition} from "../../utils/framer-motion-objects.js";
+import Rotating_Icons_Two from "../../utils/rotating_icons_two.jsx";
+import React from "react";
 
 export default function TechStack() {
     return (
@@ -10,9 +12,10 @@ export default function TechStack() {
             variants={pageVariants}
             transition={pageTransition}
         >
-            <div className="flex flex-col text-center min-h-[90vh] justify-center items-center">
-                <h1 className="font-bold text-xl">Holds Info AboutMy Tech Stack :</h1><br/>
-                <h3 className="text-lg">will be filled soon</h3>
+            <div className="flex flex-col h-[90vh] text-center justify-center items-center">
+                <div className="pointer-events-auto cursor-pointer">
+                    <Rotating_Icons_Two/>
+                </div>
             </div>
         </motion.div>
     )

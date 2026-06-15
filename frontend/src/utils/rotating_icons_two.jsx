@@ -26,7 +26,10 @@ const Rotating_Icons_Two = () => {
         ];
 
         const container = containerRef.current;
-        const radius = 200;
+        let radius = 300;
+        if(window.innerWidth < 600){
+            radius = 180;
+        }
 
         let angleX = 0;        // mouse offset X (smoothed)
         let angleY = 0;        // mouse offset Y (smoothed)
