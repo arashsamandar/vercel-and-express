@@ -11,7 +11,16 @@ export default function MainPageLogo({svgOpacity, ip}) {
     const screenWidth = useScreenSize();
 
     return (
-        <div className="relative w-full mt-[25vh] pointer-events-none">
+        <div className="relative w-full mt-[25vh] pointer-events-none [@media(min-width:750px)_and_(max-width:1500px)]:mt-[15vh]">
+            {
+                ( screenWidth < 1500 && screenWidth > 750 ) ?
+                    (
+                        <Suspense fallback={null}>
+                            <SvgGlobe ip={ip} />
+                            <div className="h-[150px]"></div>
+                        </Suspense>
+                    ) : null
+            }
             <div style={{opacity: svgOpacity}} className="globe-container relative pointer-events-auto">
                 {
                     screenWidth > 1500 ? (
