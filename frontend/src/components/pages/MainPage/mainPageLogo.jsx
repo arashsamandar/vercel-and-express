@@ -5,6 +5,8 @@ import Svg_Image_MainPage from "./svg_image_mainpage.jsx";
 import useScreenSize from "../../../hooks/useScreenSize.js";
 import "../../../assets/sass/globeContainer.sass";
 
+// some comment
+
 export default function MainPageLogo({svgOpacity, ip}) {
     const screenWidth = useScreenSize();
 
