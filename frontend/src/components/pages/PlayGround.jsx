@@ -1,5 +1,5 @@
 import React from "react";
-import DotedGlobe from "../testComponent/dotedGlobe.jsx";
+import DotedGlobe from "./aboutMe/dotedGlobe.jsx";
 import Rotating_icons from "../../utils/rotating_icons.jsx";
 
 export default function PlayGround() {

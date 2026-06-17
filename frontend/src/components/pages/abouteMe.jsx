@@ -3,7 +3,7 @@ import { pageVariants, pageTransition } from "../../utils/framer-motion-objects.
 import AboutMe_Slider from './aboutMe/aboutMe_Slider.jsx';
 import AboutMe_main from "./aboutMe/aboutMe_main.jsx";
 import { motion } from "framer-motion";
-import DotedGlobe from "../testComponent/dotedGlobe.jsx";
+import DotedGlobe from "./aboutMe/dotedGlobe.jsx";
 
 export default function AboutMe() {
     const [shapes, setShapes] = useState([]);
