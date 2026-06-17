@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import "../assets/sass/animatedHeader.sass";
 import { gsap } from 'gsap';
 import { Link } from "react-router-dom";
-import SvgImage from "../components/pages/pages_components/svg_image_header.jsx";
+import SvgImage from "./components/svg_image_header.jsx";
 
 const AnimatedHeader = () => {
     const canvasRef = useRef(null);
