@@ -208,7 +208,7 @@ const Rotating_Icons_Two = () => {
                 .icon-label {
                     font-size: 14px;
                     font-weight: 600;
-                    color: white;
+                    color: black;
                     white-space: nowrap;
                     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
                 }
