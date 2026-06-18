@@ -215,7 +215,9 @@ const AnimatedHeader = () => {
             {/* Nav using the SVG Clip Path */}
             <nav className="navv" ref={navRef} style={{ clipPath: 'url(#header-mask)', WebkitClipPath: 'url(#header-mask)' }}>
                 <div className="logo">
-                    <SvgImage/>
+                    <Link to="/home">
+                        <SvgImage/>
+                    </Link>
                 </div>
                 <ul className="list">
                     {['Home', 'About', 'Tech-Stack', 'Contact'].map((item) => (
