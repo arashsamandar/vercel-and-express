@@ -46,7 +46,7 @@ const CanvasGlobe = memo(function CanvasGlobe({ width = 400, height = 400, ip })
             context.fillStyle = "#1a1a1a";
             context.fill();
             const center = [ip.longitude, ip.latitude];
-            const projectedPoint = projection(center);
+            const projectedPoint = ip.longitude ? projection(center) : false;
             const distance = d3.geoDistance(center, [-rotationRef.current[0], -rotationRef.current[1]]);
             const isVisible = distance < Math.PI / 2;
 

@@ -26,14 +26,14 @@ export default function useIp() {
                 .then(res => res.json())
                 .catch(err => {
                     console.error("External Geo fetch failed", err);
-                    return { latitude: 51, longitude: 41, country_name: "Location", city: "Is Unknown" }; // Fallback
+                    return { latitude: null, longitude: null, country_name: null, city: null }; // Fallback
                 });
             ipData.data = {
                 ip: json1?.ip ?? "0.0.0.0",
-                latitude: json2?.latitude ?? 51,
-                longitude: json2?.longitude ?? 41,
-                country_name: json2?.country_name ?? "Unknown",
-                city: json2?.city ?? "Unknown",
+                latitude: json2.latitude,
+                longitude: json2.longitude,
+                country_name: json2.country_name,
+                city: json2.city,
             };
             setIp(ipData.data);
         }
