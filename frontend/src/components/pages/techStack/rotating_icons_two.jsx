@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 
 const Rotating_Icons_Two = () => {
     const containerRef = useRef(null);
-    // Each item: { el, x0, y0, z0, lastZ }
     const itemsRef = useRef([]);
 
     useEffect(() => {
@@ -65,29 +64,48 @@ const Rotating_Icons_Two = () => {
         const ro = new ResizeObserver(() => { rect = container.getBoundingClientRect(); });
         ro.observe(container);
 
-        // ── Mouse handlers ────────────────────────────────────────────────────
-        const handleMouseMove = (e) => {
+        // ── Interaction handlers (Mouse & Touch) ──────────────────────────────
+        const updateOffset = (clientX, clientY) => {
             const cx   = rect.left + rect.width  / 2;
             const cy   = rect.top  + rect.height / 2;
-            // FIX 1: Use the SAME base for both axes.
-            //   Before: width/2=250 horizontal, height/2=300 vertical → 20% more
-            //   sensitive horizontally because the container is 500×600.
-            //   Now: both axes divide by min(250, 300) = 250 → equal rad/px everywhere.
             const base = Math.min(rect.width, rect.height) / 2;
-            targetOffsetY = ((e.clientX - cx) / base) * 1.2;
-            targetOffsetX = ((e.clientY - cy) / base) * 1.2;
-            // 1.2 rad max (≈69°) — down from 1.5 for a more controlled feel.
+            targetOffsetY = ((clientX - cx) / base) * 1.2;
+            targetOffsetX = ((clientY - cy) / base) * 1.2;
         };
+
+        // Desktop
+        const handleMouseMove = (e) => updateOffset(e.clientX, e.clientY);
         const handleMouseEnter = () => { isHovered = true; };
-        const handleMouseLeave = () => {
+
+        // Mobile (Touch)
+        const handleTouchStart = (e) => {
+            isHovered = true;
+            if (e.touches.length > 0) {
+                updateOffset(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        };
+        const handleTouchMove = (e) => {
+            if (e.touches.length > 0) {
+                updateOffset(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        };
+
+        // Shared Leave Logic (resumes rotation)
+        const handleLeave = () => {
             isHovered = false;
-            rotX += offsetX; rotY += offsetY;
+            rotX += offsetX;
+            rotY += offsetY;
             offsetX = offsetY = targetOffsetX = targetOffsetY = 0;
         };
 
         container.addEventListener('mousemove',  handleMouseMove);
         container.addEventListener('mouseenter', handleMouseEnter);
-        container.addEventListener('mouseleave', handleMouseLeave);
+        container.addEventListener('mouseleave', handleLeave);
+
+        container.addEventListener('touchstart', handleTouchStart, { passive: true });
+        container.addEventListener('touchmove',  handleTouchMove, { passive: true });
+        container.addEventListener('touchend',   handleLeave);
+        container.addEventListener('touchcancel', handleLeave);
 
         // ── Animation loop — rAF + timestamp throttle ─────────────────────────
         const TARGET_FPS = isMobile ? 30 : 60;
@@ -99,23 +117,16 @@ const Rotating_Icons_Two = () => {
             animId = requestAnimationFrame(animate);
             if (ts - lastTime < FRAME_MS) return;
 
-            // FIX 2 & 3: Frame-rate-independent motion.
-            //   Capture elapsed BEFORE overwriting lastTime.
-            //   Cap at 100ms so a tab waking from sleep doesn't cause a jump.
             const elapsed = Math.min(ts - lastTime, 100);
             lastTime = ts;
 
-            // t = "how many 60fps frames worth of time just elapsed"
-            //   At 60fps: t ≈ 1 → multiply by 1 → same as before.
-            //   At 30fps: t ≈ 2 → auto-spin delta doubles per frame, same rad/sec.
             const t = elapsed / (1000 / 60);
 
-            // FIX 3: Auto-spin — was fps-dependent; on mobile it ran at half speed.
-            if (!isHovered) { rotY += 0.008 * t; rotX += 0.003 * t; }
+            if (!isHovered) {
+                rotY += 0.008 * t;
+                rotX += 0.003 * t;
+            }
 
-            // FIX 2: Lerp easing — was fps-dependent; mobile felt sluggish.
-            //   Math.pow(0.95, t): at t=1 → 0.95^1 = 0.95 (same 5% step as before).
-            //   At t=2 (30fps) → 0.95^2 = 0.9025 → ~10% step → covers same distance/sec.
             const lerpFactor = 1 - Math.pow(0.95, t);
             offsetX += (targetOffsetX - offsetX) * lerpFactor;
             offsetY += (targetOffsetY - offsetY) * lerpFactor;
@@ -123,18 +134,15 @@ const Rotating_Icons_Two = () => {
             const rx = rotX + offsetX;
             const ry = rotY + offsetY;
 
-            // Pre-compute sin/cos once per frame, shared across all icons
             const cosRx = Math.cos(rx), sinRx = Math.sin(rx);
             const cosRy = Math.cos(ry), sinRy = Math.sin(ry);
 
             itemsRef.current.forEach((item) => {
                 const { el, x0, y0, z0 } = item;
 
-                // Y-axis rotation (horizontal spin)
                 const x1 =  x0 * cosRy + z0 * sinRy;
                 const z1 = -x0 * sinRy + z0 * cosRy;
 
-                // X-axis rotation (x is unaffected, x2 === x1)
                 const y2 =  y0 * cosRx - z1 * sinRx;
                 const z2 =  y0 * sinRx + z1 * cosRx;
 
@@ -146,7 +154,10 @@ const Rotating_Icons_Two = () => {
                 el.style.transform = `translate(-50%,-50%) translate(${x1}px,${y2}px) scale(${scale})`;
                 el.style.opacity   = opacity;
 
-                if (zInt !== item.lastZ) { el.style.zIndex = zInt; item.lastZ = zInt; }
+                if (zInt !== item.lastZ) {
+                    el.style.zIndex = zInt;
+                    item.lastZ = zInt;
+                }
             });
         };
 
@@ -156,7 +167,13 @@ const Rotating_Icons_Two = () => {
         return () => {
             container.removeEventListener('mousemove',  handleMouseMove);
             container.removeEventListener('mouseenter', handleMouseEnter);
-            container.removeEventListener('mouseleave', handleMouseLeave);
+            container.removeEventListener('mouseleave', handleLeave);
+
+            container.removeEventListener('touchstart', handleTouchStart);
+            container.removeEventListener('touchmove',  handleTouchMove);
+            container.removeEventListener('touchend',   handleLeave);
+            container.removeEventListener('touchcancel', handleLeave);
+
             cancelAnimationFrame(animId);
             ro.disconnect();
             itemsRef.current.forEach(({ el }) => el.remove());
