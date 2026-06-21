@@ -28,7 +28,7 @@ export default function MainPage() {
             </div>
             <div className="flex justify-center pointer-events-auto">
                 <div className="h-[1000px] z-10 pointer-events-auto">
-                    {waveLoaded && <ArashCard svgOpacity={svgOpacity}/>}
+                    {waveLoaded && <ArashCard svgOpacity={svgOpacity} screenSize={screenSize}/>}
                 </div>
             </div>
             {screenSize < 800 ? <div className="h-[120px]"></div> : <div className="h-[50px]"></div>}
