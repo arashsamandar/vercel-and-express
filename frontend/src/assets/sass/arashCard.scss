@@ -1,10 +1,66 @@
 @use "sass:color";
+@property --aurora-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 
+// My Styles Apply Here -----------------------------------------------------------
+
+.card-wrapper {
+  position: relative; // also activates the existing Tailwind z-30
+
+  // diffuse outer glow
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    border-radius: 26px;
+    background: conic-gradient(
+                    from var(--aurora-angle),
+                    transparent 0deg,
+                    #53c8ef     55deg,
+                    #516acc    130deg,
+                    #cfccff    185deg,
+                    #a855f7    240deg,
+                    #00e5b0    298deg,
+                    transparent 355deg
+    );
+    filter: blur(22px);
+    opacity: 0.88;
+    animation: aurora-spin 8s linear infinite;
+  }
+
+  // crisp rotating border
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -1.5px;
+    border-radius: 11.5px;
+    background: conic-gradient(
+                    from calc(var(--aurora-angle) + 90deg),
+                    #53c8ef, #8a84ff, #cfccff, #a855f7, #00e5b0, #53c8ef
+    );
+    opacity: 0.58;
+    animation: aurora-spin 8s linear infinite;
+  }
+}
+
+@keyframes aurora-spin {
+  to { --aurora-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-wrapper::before,
+  .card-wrapper::after { animation: none; }
+}
+
+// My Styles End Here --------------------------------------------------------
 .card {
   position: relative;
   z-index: 9999 !important;
   pointer-events: auto !important;
-  max-width: 500px;
+  max-width: 700px;
   margin: auto;
   overflow-y: auto;
   overflow-x: hidden;
