@@ -6,8 +6,10 @@ import MainPageLogo from "./MainPage/mainPageLogo.jsx";
 import MovingWave from "./MainPage/movingWave.jsx";
 import Lyrics from "./MainPage/Lyrics.jsx";
 import ArashCard from "./MainPage/arashCard.jsx";
+import useScreenSize from "../../hooks/useScreenSize.js";
 
 export default function MainPage() {
+    const screenSize = useScreenSize()
     const [waveLoaded, setWaveLoaded] = useState(false);
     const svgOpacity = useScroll();
     const canvasRef = useInitParticles();
@@ -29,6 +31,7 @@ export default function MainPage() {
                     {waveLoaded && <ArashCard svgOpacity={svgOpacity}/>}
                 </div>
             </div>
+            <div className="h-[120px]"></div>
             <MovingWave scrollState={100 - (svgOpacity * 100)} onComplete={()=>setWaveLoaded(true)} />
             <canvas id="particles-canvas" ref={canvasRef} className="fixed top-0 left-0 w-full h-full pointer-events-none"/>
         </div>

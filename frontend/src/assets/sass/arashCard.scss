@@ -56,6 +56,7 @@
 }
 
 // My Styles End Here --------------------------------------------------------
+
 .card {
   position: relative;
   z-index: 9999 !important;
@@ -82,13 +83,24 @@
   &::-webkit-scrollbar {
     display: none;                  /* Chrome, Safari, and Opera */
   }
+
+  @media (max-width: 700px) {
+    margin: 20px;
+  }
+
 }
 
 .card[data-state="#about"] {
-  height: 600px;
+  height: 630px;
+
+  /* Targets screens narrower than 700px */
+  @media (max-width: 700px) {
+    height:690px;
+  }
+
   .card-main {
     padding-top: 0;
-}
+  }
 }
 
 .card[data-state="#contact"] {
@@ -226,6 +238,9 @@
   margin: 0;
   font-weight: 400;
   font-family: "DM Sans", sans-serif;
+  @media (max-width: 700px){
+    font-size: 12px;
+  }
 }
 
 .card-social {
