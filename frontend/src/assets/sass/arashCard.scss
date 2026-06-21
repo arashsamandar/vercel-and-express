@@ -10,6 +10,10 @@
 .card-wrapper {
   position: relative; // also activates the existing Tailwind z-30
 
+  @media (max-width: 700px) {
+    margin: 20px;
+  }
+
   // diffuse outer glow
   &::before {
     content: '';
@@ -86,7 +90,7 @@
 
   @media (max-width: 700px) {
     overflow: hidden;
-    margin: 20px;
+    //margin: 20px;
   }
 
 }

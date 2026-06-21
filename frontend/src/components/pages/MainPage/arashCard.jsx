@@ -36,7 +36,7 @@ export default function ArashCard({svgOpacity, screenSize}) {
                                 Hi, my name is Arash, I started programming when I was 13, by developing a Windows desktop application with (ActionScript & Flash) that I wrote for promoting and advertising a multi-level marketing company. my diploma is in math-physics. after high school, I followed my education in "Computer Software Engineering". After two years of college and writing some programs with Pascal, "C++" & "Visual C++", I came to know the "Chairman of the High Council of IT". While working for him I was very much focused on my career as a programmer and software developer, so I left my college in 2rd year. I continued cooperating with him for 8 yrs, during these years, I learned and worked with several other programming languages and frameworks and even some CMSs. creating websites with C# Asp.Net, writing modules for old Microsoft Cms ( Dotnetnuke ), to making sites with WordPress Cms ( and creating skin for this cms ), to being a "Full Stack Web Developer" Developing web applications with Php, to Developing in MVC paradigm with PHP framework "Laravel" as Back-end & React.js as Front-End.
                             </p>
                         </div>
-                        {screenSize > 750 &&
+                        {screenSize > 800 &&
                             <div className="card-social">
                                 <a className="cursor-pointer">
                                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.997 3.985h2.191V.169C17.81.117 16.51 0 14.996 0c-3.159 0-5.323 1.987-5.323 5.639V9H6.187v4.266h3.486V24h4.274V13.267h3.345l.531-4.266h-3.877V6.062c.001-1.233.333-2.077 2.051-2.077z"/></svg>
