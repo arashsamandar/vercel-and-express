@@ -4,64 +4,58 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 64px); /* Adjust min-height based on navbar height */
-    perspective: 1000px; /* Add perspective to this container */
-    padding: 20px; /* Add some padding */
+    min-height: calc(100vh - 64px);
+    perspective: 1000px;
+    padding: 20px;
 }
 
 #cube-container {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     transform-style: preserve-3d;
-    animation: randomRotate 15s infinite ease-in-out; /* CSS animation */
+    animation: randomRotate 15s infinite ease-in-out;
 }
 
 .face {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.7em; /* Adjusted font size for better proportionality */
     @apply bg-gradient-to-bl from-sky-500 to-indigo-500;
     border: 2px solid rgba(0, 0, 0, 0.2);
     opacity: 0.9;
     box-sizing: border-box;
 }
 
-/* Position and color each face */
+/* Position and color each face - updated to 35px (half of 70px) */
 #front {
-    /*background-color: rgba(255, 255, 255, 0.7); !* Tomato *!*/
-    transform: translateZ(50px);
+    transform: translateZ(35px);
 }
 
 #back {
-    /*background-color: rgba(255, 255, 255, 0.7); !* MediumSeaGreen *!*/
-    transform: translateZ(-50px) rotateY(180deg);
+    transform: translateZ(-35px) rotateY(180deg);
 }
 
 #right {
-    /*background-color: rgba(255, 255, 225, 0.7); !* RoyalBlue *!*/
-    transform: translateX(50px) rotateY(90deg);
+    transform: translateX(35px) rotateY(90deg);
 }
 
 #left {
-    /*background-color: rgba(255, 255, 255, 0.7); !* Orange *!*/
-    transform: translateX(-50px) rotateY(-90deg);
+    transform: translateX(-35px) rotateY(-90deg);
 }
 
 #top {
-    /*background-color: rgba(255, 255, 255, 0.7); !* DarkViolet *!*/
-    transform: translateY(-50px) rotateX(90deg);
+    transform: translateY(-35px) rotateX(90deg);
 }
 
 #bottom {
-    /*background-color: rgba(255, 255, 255, 0.7); !* Gold *!*/
-    transform: translateY(50px) rotateX(-90deg);
+    transform: translateY(35px) rotateX(-90deg);
 }
 
-/* Keyframes for random-like rotation */
+/* Keyframes remain the same */
 @keyframes randomRotate {
     0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
     25% { transform: rotateX(90deg) rotateY(45deg) rotateZ(15deg); }

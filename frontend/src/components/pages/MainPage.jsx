@@ -7,7 +7,6 @@ import MovingWave from "./MainPage/movingWave.jsx";
 import Lyrics from "./MainPage/Lyrics.jsx";
 import ArashCard from "./MainPage/arashCard.jsx";
 import useScreenSize from "../../hooks/useScreenSize.js";
-import MainPage_cube from "./mainpage_cube.jsx";
 
 export default function MainPage() {
     const screenSize = useScreenSize()
