@@ -31,7 +31,7 @@ export default function Lyrics({ svgOpacity, ip }) {
                     fpsRef.current = Math.round(avgFps); // Store latest FPS in Ref
                     setRunCount(prev => prev + 1); // Trigger next 3s measurement cycle
                     if(avgFps < 25 && !isLowEnd) {
-                        alert('This application is mid to high resource intensive and unfortunately is currently lagging on your device ( based on calculated frame rate per seconds ) . For better experience, please use a device with higher performance.');
+                        // alert('This application is mid to high resource intensive and unfortunately is currently lagging on your device ( based on calculated frame rate per seconds ) . For better experience, please use a device with higher performance.');
                         setIsLowEnd(true);
                     }
                     return;
