@@ -1,11 +1,11 @@
 import React from "react";
-import '../../../../assets/css/cubeStyles.css';
-import laravel from '../../../../assets/images/laravel4.webp';
-import react from '../../../../assets/images/react2.png';
-import javascript from '../../../../assets/images/js2.png';
-import nodejs from '../../../../assets/images/nodejs.png';
-import nextjs from '../../../../assets/images/next-js.png'
-import postgres from '../../../../assets/images/postgres.svg';
+import '../../assets/css/cubeStyles.css';
+import laravel from '../../assets/images/laravel4.webp';
+import react from '../../assets/images/react2.png';
+import javascript from '../../assets/images/js2.png';
+import nodejs from '../../assets/images/nodejs.png';
+import nextjs from '../../assets/images/next-js.png'
+import postgres from '../../assets/images/postgres.svg';
 
 export default function MainPage_cube() {
     return (
