@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import useInitParticles from "../../assets/js/mainPage/Particles.js";
 import useScroll from "../../hooks/useScroll.js";
 import useIp from "../../hooks/useIp.js";
@@ -7,18 +7,24 @@ import MovingWave from "./MainPage/movingWave.jsx";
 import Lyrics from "./MainPage/Lyrics.jsx";
 import ArashCard from "./MainPage/arashCard.jsx";
 import useScreenSize from "../../hooks/useScreenSize.js";
+import useLowFps from "../../hooks/useLowFps.js";          // ← new
+import LowFpsModal from "./MainPage/lowFpsModal.jsx";      // ← new
 
 export default function MainPage() {
-    const screenSize = useScreenSize()
+    const screenSize = useScreenSize();
     const [waveLoaded, setWaveLoaded] = useState(false);
     const svgOpacity = useScroll();
-    const canvasRef = useInitParticles();
-    const ip = useIp();
+    const canvasRef  = useInitParticles();
+    const ip         = useIp();
+    const { fps, showModal, closeModal } = useLowFps(30);  // ← new
 
     return (
         <div>
+            {/* Modal lives here — at the top of the tree, above everything */}
+            {showModal && <LowFpsModal fps={fps} onClose={closeModal} />}   {/* ← new */}
+
             <div id="lyrics" className={`fixed smallMobile:top-[10%] max-w-[70vw] md:max-w-[48vw] h-[50px] ${svgOpacity < 0.9 ? "top-[-20px]" : "top-[20px]"}`}>
-                <Lyrics svgOpacity={svgOpacity} ip={ip}/>
+                <Lyrics svgOpacity={svgOpacity} ip={ip} fps={fps} />   {/* ← pass fps down */}
             </div>
             <br/><br/>
             <div className="flex flex-col min-h-[68.4vh] items-center justify-center">
@@ -32,7 +38,7 @@ export default function MainPage() {
                 </div>
             </div>
             {screenSize < 800 ? <div className="h-[120px]"></div> : <div className="h-[50px]"></div>}
-            <MovingWave scrollState={100 - (svgOpacity * 100)} onComplete={()=>setWaveLoaded(true)} />
+            <MovingWave scrollState={100 - (svgOpacity * 100)} onComplete={() => setWaveLoaded(true)} />
             <canvas id="particles-canvas" ref={canvasRef} className="fixed top-0 left-0 w-full h-full pointer-events-none"/>
         </div>
     );
