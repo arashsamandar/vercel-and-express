@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import useInitParticles from "../../assets/js/mainPage/Particles.js";
 import useScroll from "../../hooks/useScroll.js";
 import useIp from "../../hooks/useIp.js";
@@ -9,6 +9,7 @@ import ArashCard from "./MainPage/arashCard.jsx";
 import useScreenSize from "../../hooks/useScreenSize.js";
 
 export default function MainPage() {
+    useLayoutEffect(() => {window.scrollTo({ top: 0, left: 0, behavior: "instant" });}, []); // Scroll to Top On Every Visit of Main Page
     const screenSize = useScreenSize()
     const [waveLoaded, setWaveLoaded] = useState(false);
     const svgOpacity = useScroll();
