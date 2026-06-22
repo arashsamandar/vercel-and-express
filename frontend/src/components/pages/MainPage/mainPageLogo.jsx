@@ -40,7 +40,7 @@ export default function MainPageLogo({ svgOpacity, ip }) {
                     <div className={`${screenWidth < 750 && "h-[50px]"}`}>
                         <CubeText svgOpacity={svgOpacity} />
                     </div>
-                    {screenWidth < 750 && <div className="flex justify-center pt-[50px]"><MainPage_cube/></div>}
+                    {screenWidth < 750 && <div className="flex justify-center pt-[50px]"><MainPage_cube svgOpacity={svgOpacity}/></div>}
                 </div>
             </div>
 

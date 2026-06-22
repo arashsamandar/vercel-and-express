@@ -1,5 +1,4 @@
 /* --- Cube Specific Styles --- */
-/* Container to center the cube below the navbar */
 .cube-section {
     display: flex;
     justify-content: center;
@@ -23,43 +22,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.8em;
-    @apply bg-gradient-to-bl from-sky-500 to-indigo-500;
+    /* Removed opacity from here so it can be controlled by React */
     border: 2px solid rgba(0, 0, 0, 0.2);
-    opacity: 0.9;
     box-sizing: border-box;
+    /* You might want a background color here to keep the faces solid */
+    background: rgba(255, 255, 255, 0.9);
 }
 
-/* Position and color each face - updated to 42px (half of 84px) */
-#front {
-    transform: translateZ(42px);
+/* Ensure images don't overflow */
+.face img {
+    max-width: 80%;
+    max-height: 80%;
 }
 
-#back {
-    transform: translateZ(-42px) rotateY(180deg);
-}
+#front  { transform: translateZ(42px); }
+#back   { transform: translateZ(-42px) rotateY(180deg); }
+#right  { transform: translateX(42px) rotateY(90deg); }
+#left   { transform: translateX(-42px) rotateY(-90deg); }
+#top    { transform: translateY(-42px) rotateX(90deg); }
+#bottom { transform: translateY(42px) rotateX(-90deg); }
 
-#right {
-    transform: translateX(42px) rotateY(90deg);
-}
-
-#left {
-    transform: translateX(-42px) rotateY(-90deg);
-}
-
-#top {
-    transform: translateY(-42px) rotateX(90deg);
-}
-
-#bottom {
-    transform: translateY(42px) rotateX(-90deg);
-}
-
-/* Keyframes remain the same */
 @keyframes randomRotate {
     0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
     25% { transform: rotateX(90deg) rotateY(45deg) rotateZ(15deg); }
-    50% { transform: rotateX(180deg) rotateY(180deg) rotateZ(45deg); }
+    50% { transform: rotateX(180deg) rotateY(180deg) rotateX(45deg); }
     75% { transform: rotateX(270deg) rotateY(225deg) rotateZ(30deg); }
     100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
 }
