@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { pageVariants, pageTransition } from "../../utils/framer-motion-objects.js";
 import AboutMe_Slider from './aboutMe/aboutMe_Slider.jsx';
 import AboutMe_main from "./aboutMe/aboutMe_main.jsx";

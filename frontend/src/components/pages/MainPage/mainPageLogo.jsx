@@ -3,6 +3,7 @@ import CubeText from "./cubeText.jsx";
 import Svg_Image_MainPage from "./svg_image_mainpage.jsx";
 import useScreenSize from "../../../hooks/useScreenSize.js";
 import "../../../assets/sass/globeContainer.sass";
+import MainPage_cube from "./mainpage_cube.jsx";
 const SvgGlobe = lazy(() => import("./svgGlobe.jsx"));
 
 export default function MainPageLogo({ svgOpacity, ip }) {
@@ -36,7 +37,10 @@ export default function MainPageLogo({ svgOpacity, ip }) {
 
             <div className="w-full flex align-middle items-center justify-center select-none">
                 <div className="ml-5 w-full min-h-[400px] min-w-[600px] pointer-events-auto [@media(min-width:860px)_and_(max-width:1800px)]:mr-[100px]">
-                    <CubeText svgOpacity={svgOpacity} />
+                    <div className={`${screenWidth < 750 && "h-[50px]"}`}>
+                        <CubeText svgOpacity={svgOpacity} />
+                    </div>
+                    {screenWidth < 750 && <div className="flex justify-center pt-[50px]"><MainPage_cube/></div>}
                 </div>
             </div>
 
