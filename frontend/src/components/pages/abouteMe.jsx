@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import { pageVariants, pageTransition } from "../../utils/framer-motion-objects.js";
 import AboutMe_Slider from './aboutMe/aboutMe_Slider.jsx';
 import AboutMe_main from "./aboutMe/aboutMe_main.jsx";
@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import DotedGlobe from "./aboutMe/dotedGlobe.jsx";
 
 export default function AboutMe() {
+    useLayoutEffect(() => {window.scrollTo({ top: 0, left: 0, behavior: "instant" });}, []); // Scroll to Top On Every Visit of About Me
     const [shapes, setShapes] = useState([]);
     const shapeIdRef = useRef(0);
     const intervalRef = useRef(null);
