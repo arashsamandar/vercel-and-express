@@ -3,7 +3,7 @@ import CubeText from "./cubeText.jsx";
 import Svg_Image_MainPage from "./svg_image_mainpage.jsx";
 import useScreenSize from "../../../hooks/useScreenSize.js";
 import "../../../assets/sass/globeContainer.sass";
-import MainPage_cube from "../mainpage_cube.jsx";
+import MainPage_cube from "./mainpage_cube.jsx";
 const SvgGlobe = lazy(() => import("./svgGlobe.jsx"));
 
 export default function MainPageLogo({ svgOpacity, ip }) {
