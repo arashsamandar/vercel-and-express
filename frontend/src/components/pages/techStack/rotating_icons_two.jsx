@@ -182,7 +182,8 @@ const Rotating_Icons_Two = () => {
     }, []);
 
     return (
-        <div className="absolute left-[40vw] top-[20vh] w-[500px] justify-center z-10">
+        <div className="absolute left-[25vw] top-[20vh] w-[50vw] justify-center z-10">
+            {/* on pc : 40vw and 20vh */}
             <div ref={containerRef} className="relative w-full h-[600px]" />
             <style jsx>{`
                 .icon-item {
