@@ -182,7 +182,7 @@ const Rotating_Icons_Two = () => {
     }, []);
 
     return (
-        <div className="flex w-[500px] justify-center z-10">
+        <div className="absolute left-[40vw] top-[20vh] w-[500px] justify-center z-10">
             <div ref={containerRef} className="relative w-full h-[600px]" />
             <style jsx>{`
                 .icon-item {
@@ -208,7 +208,7 @@ const Rotating_Icons_Two = () => {
                 .icon-label {
                     font-size: 14px;
                     font-weight: 600;
-                    color: black;
+                    color: ghostwhite;
                     white-space: nowrap;
                     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
                 }
