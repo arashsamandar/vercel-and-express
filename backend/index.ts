@@ -20,7 +20,7 @@ app.use((req,res,next)=>{
 });
 
 // ------------ database -----------
-connectToMongoAtlas();
+// connectToMongoAtlas();
 
 // ------------ server listen -----------
 app.listen(3000,()=>console.log('application ready to use'));
