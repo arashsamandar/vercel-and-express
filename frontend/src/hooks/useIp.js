@@ -11,7 +11,7 @@ export default function useIp() {
                 return;
             }
             console.log("fetch ip started again");
-            if(localStorage.getItem("PC_ID") === "771a4fc0-c417-4800-a64d-d0558abf0993") {
+            if(localStorage.getItem("PC_ID") === "771a4fc0-c417-4800-a64d-d0558abf09") {
                 ipData.data = {message: "Localhost was Detected", latitude: 33, longitude: 54, country_name: "Localhost", city: "Salamander Home", ip: "127.0.0.1"};
                 setIp(ipData.data);
                 return;
