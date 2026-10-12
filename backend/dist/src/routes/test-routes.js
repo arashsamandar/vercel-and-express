@@ -23,30 +23,20 @@ router.get('/checkRoute', (req, res) => {
     });
 });
 router.get("/getIp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // const forwarded = req.headers["x-forwarded-for"];
-    let ip = 456;
-    //
-    // if (typeof forwarded === "string") {
-    //     ip = forwarded.split(",")[0];
-    // } else {
-    //     ip = req.socket.remoteAddress; // fallback for localhost/dev
-    // }
+    const forwarded = req.headers["x-forwarded-for"];
+    let ip;
+    if (typeof forwarded === "string") {
+        ip = forwarded.split(",")[0];
+    }
+    else {
+        ip = req.socket.remoteAddress; // fallback for localhost/dev
+    }
     res.json({
         message: "This is the Route for getting IP address",
         latitude: 10,
         longitude: 10,
         country_name: "Nigeria",
         ip: ip,
-    });
-    yield fetch(`https://api.telegram.org/bot8989641853:AAEViTdEnf78OkvwUJoMwMcZj9dU8OI_nFw/sendMessage`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            chat_id: 5665639218,
-            text: `A User Saw U With IP : ${ip}`,
-        }),
     });
 }));
 router.get("/newRoute", (req, res) => {
