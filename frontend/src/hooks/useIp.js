@@ -22,6 +22,7 @@ export default function useIp() {
                     console.error("Internal IP fetch failed", err);
                     return { ip: "0.0.0.0" }; // Fallback value
                 });
+            console.log(json1.message);
             const json2 = await fetch("https://ipapi.co/json/")
                 .then(res => res.json())
                 .catch(err => {
