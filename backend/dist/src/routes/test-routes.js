@@ -25,54 +25,36 @@ router.get('/checkRoute', (req, res) => {
 router.get("/getIp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const forwarded = req.headers["x-forwarded-for"];
     let ip;
+    let message = "";
     if (typeof forwarded === "string") {
         ip = forwarded.split(",")[0];
     }
     else {
         ip = req.socket.remoteAddress; // fallback for localhost/dev
     }
-    fetch(`https://api.telegram.org/bot8989641853:AAEViTdEnf78OkvwUJoMwMcZj9dU8OI_nFw/sendMessage`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            chat_id: 5665639218,
-            text: `A User Saw U With IP: ${ip}`,
-        }),
-    });
+    try {
+        yield fetch(`https://api.telegram.org/bot${process.env.TELE_KEY}/sendMessage`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                chat_id: 5665639218,
+                text: `A User Saw U With IP: ${ip}`,
+            }),
+        });
+        message = "Sent was Successful Arash";
+    }
+    catch (error) {
+        message = "Telegram request failed " + error;
+    }
     res.json({
-        message: "This is the Route for getting IP address",
+        message: message,
         latitude: 10,
         longitude: 10,
         country_name: "Nigeria",
         ip: ip,
     });
-    // try {
-    //     const response = await fetch(
-    //         `https://api.telegram.org/bot8989641853:AAEViTdEnf78OkvwUJoMwMcZj9dU8OI_nFw/sendMessage`,
-    //         {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({
-    //                 chat_id: 5665639218,
-    //                 text: `A User Saw U With IP: ${ip}`,
-    //             }),
-    //         }
-    //     );
-    //
-    //     const result = await response.json();
-    //
-    //     if (!response.ok || !result.ok) {
-    //         console.error("Telegram API error:", result);
-    //     } else {
-    //         console.log("Telegram message sent successfully.");
-    //     }
-    // } catch (error) {
-    //     console.error("Failed to send Telegram message:", error);
-    // }
 }));
 router.get("/newRoute", (req, res) => {
     res.json({
