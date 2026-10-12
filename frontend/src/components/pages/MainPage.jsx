@@ -17,7 +17,7 @@ export default function MainPage() {
     const canvasRef  = useInitParticles();
     const ip = useIp();
     const { fps, showModal, closeModal } = useLowFps(30);
-    console.log(process.env.TELEGTAM_KEY);
+    console.log(process.env.TELEGRAM_KEY);
     return (
         <div>
             {showModal && <LowFpsModal fps={fps} onClose={closeModal} />}
