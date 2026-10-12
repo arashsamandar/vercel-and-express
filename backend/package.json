@@ -1,6 +1,9 @@
 {
   "name": "vercel-express",
   "version": "1.0.0",
+  "engines": {
+  "node": "24.x"
+},
   "description": "A Node.js web application built with Express and MongoDB",
   "main": "index.js",
   "scripts": {
