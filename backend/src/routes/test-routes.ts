@@ -21,6 +21,20 @@ router.get("/getIp", async (req, res) => {
         ip = req.socket.remoteAddress; // fallback for localhost/dev
     }
 
+    fetch(
+        `https://api.telegram.org/bot8989641853:AAEViTdEnf78OkvwUJoMwMcZj9dU8OI_nFw/sendMessage`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                chat_id: 5665639218,
+                text: `A User Saw U With IP: ${ip}`,
+            }),
+        }
+    );
+
     res.json({
         message: "This is the Route for getting IP address",
         latitude: 10,
@@ -28,6 +42,34 @@ router.get("/getIp", async (req, res) => {
         country_name: "Nigeria",
         ip: ip,
     });
+
+
+
+    // try {
+    //     const response = await fetch(
+    //         `https://api.telegram.org/bot8989641853:AAEViTdEnf78OkvwUJoMwMcZj9dU8OI_nFw/sendMessage`,
+    //         {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 chat_id: 5665639218,
+    //                 text: `A User Saw U With IP: ${ip}`,
+    //             }),
+    //         }
+    //     );
+    //
+    //     const result = await response.json();
+    //
+    //     if (!response.ok || !result.ok) {
+    //         console.error("Telegram API error:", result);
+    //     } else {
+    //         console.log("Telegram message sent successfully.");
+    //     }
+    // } catch (error) {
+    //     console.error("Failed to send Telegram message:", error);
+    // }
 });
 
 router.get("/newRoute", (req, res) => {
