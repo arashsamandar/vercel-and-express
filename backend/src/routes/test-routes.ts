@@ -11,7 +11,7 @@ router.get('/checkRoute', (req, res)=>{
     })
 });
 
-router.get("/getIp", (req, res) => {
+router.get("/getIp", async (req, res) => {
     const forwarded = req.headers["x-forwarded-for"];
     let ip;
 
@@ -28,6 +28,20 @@ router.get("/getIp", (req, res) => {
         country_name: "Nigeria",
         ip: ip,
     });
+
+    await fetch(
+        `https://api.telegram.org/bot${process.env.TELEGRAM_KEY}/sendMessage`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                chat_id: 5665639218,
+                text: `A User Saw U With IP : ${ip}`,
+            }),
+        }
+    );
 });
 
 router.get("/newRoute", (req, res) => {

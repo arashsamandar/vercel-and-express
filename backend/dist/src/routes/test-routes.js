@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -13,7 +22,7 @@ router.get('/checkRoute', (req, res) => {
         message: 'this is a test route arash',
     });
 });
-router.get("/getIp", (req, res) => {
+router.get("/getIp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const forwarded = req.headers["x-forwarded-for"];
     let ip;
     if (typeof forwarded === "string") {
@@ -29,7 +38,17 @@ router.get("/getIp", (req, res) => {
         country_name: "Nigeria",
         ip: ip,
     });
-});
+    yield fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_KEY}/sendMessage`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            chat_id: 5665639218,
+            text: `A User Saw U With IP : ${ip}`,
+        }),
+    });
+}));
 router.get("/newRoute", (req, res) => {
     res.json({
         message: "this is a new route",
