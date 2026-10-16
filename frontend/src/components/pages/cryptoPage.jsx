@@ -18,7 +18,7 @@ export default function CryptoPage(){
         } else {
             const link = document.createElement("link");
             link.rel = "icon";
-            link.href = "/cryptoFavicon.png";
+            link.href = "../../../public/cryptoFavicon.png";
             link.type = "image/png";
             document.head.appendChild(link);
         }
