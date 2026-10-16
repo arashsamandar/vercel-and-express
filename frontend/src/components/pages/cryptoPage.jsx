@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /*  CONFIG — replace these with your own values                        */
 /* ------------------------------------------------------------------ */
-const BRAND = "Arash Crypto";
+const BRAND = "CryptoX";
 const LOGO_URL = ""; // <-- put your bitcoin image link here. Empty = built-in fallback icon
 const API = {
     sendCode: "https://your-api.com/auth/send-code", // POST { phone }
@@ -529,7 +529,9 @@ const css = `
 /* small screens */
 @media (max-width:480px){
   .lg-card{padding:28px 20px 22px}
-  .lg-btn-send{flex:1 1 100%}
+  .lg-phone-row{flex-direction:column-reverse;flex-wrap:nowrap}
+  .lg-field{flex:0 0 auto;width:100%}
+  .lg-btn-send{flex:0 0 auto;width:100%}
   .lg-otp{gap:9px}
   .lg-otp-box{width:56px;height:64px}
 }
