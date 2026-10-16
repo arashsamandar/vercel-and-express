@@ -345,7 +345,7 @@ export default function CryptoPage() {
 
                     <ul className="lg-trust">
                         <li><LockIcon />ورود حفاظت شده</li>
-                        <li><ShieldIcon />آی‌پی بازدید و شماره تلفن واردشده به سرور ارسال می‌شوند و به تلگرام گزارش می‌شوند.</li>
+                        <li><ShieldIcon />اطلاعات ورود شما محفوظ و یک بار مصرف هستند</li>
                     </ul>
                 </section>
             </main>
