@@ -1,42 +1,59 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-            property="og:title"
-            content="Crypto | Arash"
-    />
-    <meta
-            property="og:description"
-            content="Explore my cryptocurrency web application."
-    />
-    <meta
-            property="og:image"
-            content="https://crypto.arashwork.ir/crypto-preview.jpg"
-    />
-    <meta
-            property="og:url"
-            content="https://crypto.arashwork.ir/"
-    />
-    <meta property="og:type" content="website" />
-    <link rel="icon" href="/cryptoFavicon.ico" />
-    <link rel="icon" href="/favicon.ico" />
-    <script>
-      if (window.location.hostname === "crypto.arashwork.ir") {
-        const icon = document.createElement("link");
-        icon.rel = "icon";
-        icon.type = "image/x-icon";
-        icon.href = "/cryptoFavicon.ico";
+<head>
+  <meta charset="UTF-8" />
 
-        document.head.appendChild(icon);
-      }
-    </script>
-    <title>Arash Aghashahi</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Arash Aghashahi</title>
+
+  <!-- Browser tab icon for the Crypto subdomain -->
+  <link
+          rel="icon"
+          type="image/x-icon"
+          href="/cryptoFavicon.ico"
+  />
+
+  <!-- WhatsApp and other social link previews -->
+  <meta property="og:title" content="Crypto | Arash" />
+
+  <meta
+          property="og:description"
+          content="Explore my cryptocurrency web application."
+  />
+
+  <meta
+          property="og:type"
+          content="website"
+  />
+
+  <meta
+          property="og:url"
+          content="https://crypto.arashwork.ir/"
+  />
+
+  <meta
+          property="og:image"
+          content="https://crypto.arashwork.ir/crypto-preview.png"
+  />
+
+  <meta
+          property="og:image:type"
+          content="image/png"
+  />
+
+  <meta
+          property="og:image:alt"
+          content="Arash Crypto application"
+  />
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="module" src="/src/main.jsx"></script>
+</body>
 </html>
