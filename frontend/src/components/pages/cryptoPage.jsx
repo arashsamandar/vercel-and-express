@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 /* ------------------------------------------------------------------ */
-/*  CONFIG — replace these with your own values                        */
+/*  CONFIG — replace these with your own values arash                      */
 /* ------------------------------------------------------------------ */
 const BRAND = "CryptoX";
 const LOGO_URL = ""; // <-- put your bitcoin image link here. Empty = built-in fallback icon
