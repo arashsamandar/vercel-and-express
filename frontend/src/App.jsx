@@ -28,8 +28,8 @@ function AnimatedRoutes() {
 
                     <Route path="*" element={<NotFound404/>}/>
                 </Route>
-                <Route path="/crypto" element={<PlayGround />}/>
                 <Route path="/wave" element={<MovingWave />}/>
+                <Route path="/crypto" element={<CryptoPage />}/>
             </Routes>
         </AnimatePresence>
     )
