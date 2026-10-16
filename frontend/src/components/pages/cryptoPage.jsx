@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
 
-export default function CryptoPage(){
+import React, { useEffect } from "react";
 
+export default function CryptoPage() {
     useEffect(() => {
         const originalTitle = document.title;
 
@@ -10,17 +10,19 @@ export default function CryptoPage(){
         );
 
         const originalFavicon = favicon?.href;
+        let newFavicon = null;
 
         document.title = "Crypto | Arash";
 
         if (favicon) {
-            favicon.href = "/crypto-favicon.svg";
+            favicon.href = "/cryptoFavicon.ico";
+            favicon.type = "image/x-icon";
         } else {
-            const link = document.createElement("link");
-            link.rel = "icon";
-            link.href = "../../../public/cryptoFavicon.ico";
-            link.type = "image/x-icon";
-            document.head.appendChild(link);
+            newFavicon = document.createElement("link");
+            newFavicon.rel = "icon";
+            newFavicon.href = "/cryptoFavicon.ico";
+            newFavicon.type = "image/x-icon";
+            document.head.appendChild(newFavicon);
         }
 
         return () => {
@@ -29,14 +31,16 @@ export default function CryptoPage(){
             if (favicon && originalFavicon) {
                 favicon.href = originalFavicon;
             }
+
+            if (newFavicon) {
+                newFavicon.remove();
+            }
         };
     }, []);
 
-    return(
-        <>
-            <h1 className="text-3xl">
-                Welcome To My Crypto Page Sir :)
-            </h1>
-        </>
-    )
+    return (
+        <h1 className="text-3xl">
+            Welcome To My Crypto Page Sir :)
+        </h1>
+    );
 }
