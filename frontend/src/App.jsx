@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './App.css';
+import CryptoPage from "./components/pages/cryptoPage.jsx";
 import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import MainLayout from "./layouts/MainLayout.jsx";
@@ -27,7 +28,7 @@ function AnimatedRoutes() {
 
                     <Route path="*" element={<NotFound404/>}/>
                 </Route>
-                <Route path="/play" element={<PlayGround />}/>
+                <Route path="/crypto" element={<PlayGround />}/>
                 <Route path="/wave" element={<MovingWave />}/>
             </Routes>
         </AnimatePresence>
@@ -35,6 +36,12 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+
+    const host = window.location.hostname;
+    if(host === "crypto.arashwork.ir"){
+        return <CryptoPage />
+    }
+
     return (
         <BrowserRouter>
             <AnimatedRoutes/>

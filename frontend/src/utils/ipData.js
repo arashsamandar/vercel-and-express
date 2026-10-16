@@ -1,4 +1,1 @@
-
-export let ipData = {
-    data: null,
-};
+export const ipData = { data: null, promise: null };
