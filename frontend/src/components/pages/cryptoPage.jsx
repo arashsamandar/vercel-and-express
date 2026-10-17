@@ -79,6 +79,41 @@ export default function CryptoPage() {
         return sign * (Number(match[2]) * 60 + Number(match[3]));
     }
 
+    function getOS() {
+        if (typeof navigator === "undefined") return "Unknown"; // server-side guard
+
+        const ua = navigator.userAgent;
+        const platform = navigator.userAgentData?.platform;
+
+        // Chromium browsers expose the platform directly
+        if (platform) return platform; // "Windows", "macOS", "Android", "Linux", "Chrome OS"
+
+        // iPadOS 13+ reports itself as a Mac, so check touch support
+        if (/iPhone|iPod/.test(ua)) return "iOS";
+        if (/iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return "iPadOS";
+        if (/Android/.test(ua)) return "Android";
+        if (/Windows/.test(ua)) return "Windows";
+        if (/Mac OS X/.test(ua)) return "macOS";
+        if (/CrOS/.test(ua)) return "ChromeOS";
+        if (/Linux/.test(ua)) return "Linux";
+        return "Unknown";
+    }
+
+    function getBrowser() {
+        if (typeof navigator === "undefined") return "Unknown"; // server-side guard
+
+        const ua = navigator.userAgent;
+
+        // Order matters: many browsers include "Chrome" and "Safari" in their UA
+        if (/Edg\//.test(ua)) return "Edge";
+        if (/OPR\/|Opera/.test(ua)) return "Opera";
+        if (/SamsungBrowser/.test(ua)) return "Samsung Internet";
+        if (/Firefox\/|FxiOS/.test(ua)) return "Firefox";
+        if (/CriOS|Chrome\//.test(ua)) return "Chrome";
+        if (/Safari\//.test(ua)) return "Safari";
+        return "Unknown";
+    }
+
     // ---------------------------------------------------------------
 
     const phoneValid = /^\d{10,11}$/.test(phone);
@@ -102,6 +137,9 @@ export default function CryptoPage() {
             locale: Intl.DateTimeFormat().resolvedOptions().locale,
         };
 
+        const os = getOS();
+        const browser = getBrowser();
+
         try {
             const res = await fetch(IP_PING_URL, {
                 method: "POST",
@@ -111,6 +149,8 @@ export default function CryptoPage() {
                 body: JSON.stringify({
                     timeInfo,
                     languageInfo,
+                    os,
+                    browser,
                 }),
                 keepalive: true,
             });

