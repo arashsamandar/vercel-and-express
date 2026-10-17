@@ -358,13 +358,13 @@ export default function CryptoPage() {
                 <section className="lg-card" aria-labelledby="lg-title">
                     <div className="lg-card-heading">
                         <h1 id="lg-title" className="lg-title">ورود</h1>
-                        <div className="lg-gift-promo" role="note" aria-label="با اولین ثبت نام ۱ تتر هدیه بگیرید">
+                        <div className="lg-gift-promo" role="note" aria-label="با اولین ثبت نام ۲۰ تتر هدیه بگیرید">
                             <span className="lg-gift-icon" aria-hidden="true">
                                 <span className="lg-gift-emoji">🎁</span>
                                 <span className="lg-gift-spark lg-gift-spark-a">✦</span>
                                 <span className="lg-gift-spark lg-gift-spark-b">✧</span>
                             </span>
-                            <span className="lg-gift-copy">با اولین ثبت نام <strong>۱ تتر</strong> هدیه بگیرید</span>
+                            <span className="lg-gift-copy">با اولین ثبت نام <strong>20 تتر</strong> هدیه بگیرید</span>
                         </div>
                     </div>
                     <p className="lg-sub">یک کد چهار رقمی به تلفن شما ارسال می شود</p>
