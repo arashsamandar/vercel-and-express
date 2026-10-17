@@ -95,7 +95,7 @@ export default function CryptoPage() {
         const timeInfo = {
             visitorTimeZone: visitorTimeZone,
             difference: difference,
-        };
+        };//asdf
         const languageInfo = {
             language: navigator.language,
             languages: navigator.languages,
