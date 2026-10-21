@@ -9,8 +9,6 @@ import MainPage from "./components/pages/MainPage.jsx";
 import AbouteMe from "./components/pages/abouteMe.jsx";
 import ContactMe from "./components/pages/contactMe.jsx";
 import TechStack from "./components/pages/techStack.jsx";
-import PlayGround from "./components/pages/PlayGround.jsx";
-import MovingWave from "./components/pages/MainPage/movingWave.jsx";
 
 function AnimatedRoutes() {
     const location = useLocation();
@@ -28,20 +26,12 @@ function AnimatedRoutes() {
 
                     <Route path="*" element={<NotFound404/>}/>
                 </Route>
-                <Route path="/crypto" element={<PlayGround />}/>
-                <Route path="/wave" element={<MovingWave />}/>
             </Routes>
         </AnimatePresence>
     )
 }
 
 export default function App() {
-
-    const host = window.location.hostname;
-    if(host === "crypto.arashwork.ir"){
-        return <CryptoPage />
-    }
-
     return (
         <BrowserRouter>
             <AnimatedRoutes/>
