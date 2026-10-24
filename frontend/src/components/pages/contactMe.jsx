@@ -1,5 +1,5 @@
 import {motion} from "framer-motion";
-import {pageVariants, pageTransition} from "../../utils/framer-motion-objects.js";
+import {pageVariants, pageTransition} from "../../libs/framer-motion-objects.js";
 
 export default function ContactMe() {
     return (

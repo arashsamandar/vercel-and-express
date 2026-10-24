@@ -1,5 +1,5 @@
 import {motion} from "framer-motion";
-import {pageVariants, pageTransition} from "../../utils/framer-motion-objects.js";
+import {pageVariants, pageTransition} from "../../libs/framer-motion-objects.js";
 import Rotating_Icons_Two from "./techStack/rotating_icons_two.jsx";
 import React, { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';

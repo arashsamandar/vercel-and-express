@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ipData } from "../utils/ipData.js";
+import { ipData } from "../libs/ipData.js";
 
 async function loadIp() {
     if (localStorage.getItem("PC_ID") === "771a4fc0-c417-4800-a64d-d0558abf09") {

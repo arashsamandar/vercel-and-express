@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './App.css';
-import CryptoPage from "./components/pages/cryptoPage.jsx";
 import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import MainLayout from "./layouts/MainLayout.jsx";
