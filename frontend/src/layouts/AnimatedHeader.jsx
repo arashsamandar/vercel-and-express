@@ -9,6 +9,9 @@ const AnimatedHeader = () => {
     const navRef = useRef(null);
     const svgPathRef = useRef(null); // Ref for the SVG path
 
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+    const themeRef = useRef(theme);
+
     const pointsRef = useRef({
         topLeft: 25,
         topY: 0,
@@ -25,6 +28,7 @@ const AnimatedHeader = () => {
         tl: null, openTL: null, progress: 0, maxTimeline: 0.6,
         winPointerY: 0, hover: false, isOpen: false,
         width: 0, height: 0, endX: 100, endY: 130,
+        offsetX: 0, offsetY: 0,
     });
 
     const steps = [
@@ -34,7 +38,16 @@ const AnimatedHeader = () => {
         [-0.1, 0.66, 0.25, 1, 0.75, 1, 1.10, 0.66]
     ];
 
+    const measureOffsets = () => {
+        if (!canvasRef.current || !navRef.current) return;
+        const c = canvasRef.current.getBoundingClientRect();
+        const n = navRef.current.getBoundingClientRect();
+        animationRef.current.offsetX = c.left - n.left;
+        animationRef.current.offsetY = c.top - n.top;
+    };
+
     const drawPath = () => {
+        const dark = themeRef.current === 'dark';
         const canvas = canvasRef.current;
         if (!canvas || !svgPathRef.current) return;
 
@@ -53,18 +66,17 @@ const AnimatedHeader = () => {
         ctx.lineTo(width, 0);
         ctx.lineTo(0, 0);
         ctx.closePath();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.fillStyle = dark ? 'rgba(15, 23, 42, 0.92)' : 'rgba(255, 255, 255, 0.9)';
         ctx.shadowColor = 'rgba(0,0,0,0.3)';
         ctx.shadowBlur = 10;
         ctx.fill();
 
         // 2. Update SVG Path ( Replace Canvas Mask For Optimization )
-        const d = `M ${p.topLeft} 0 
-                   L ${p.topLeft} ${p.topY} 
-                   C ${p.bottomLeft} ${p.bottomY}, ${p.bottomRight} ${p.bottomY}, ${p.topRight} ${p.topY} 
-                   L ${p.topRight} 0 
-                   L ${width} 0 
-                   L 0 0 Z`;
+        const { offsetX: ox, offsetY: oy } = animationRef.current;
+        const d = `M ${p.topLeft + ox} ${oy}
+           L ${p.topLeft + ox} ${p.topY + oy}
+           C ${p.bottomLeft + ox} ${p.bottomY + oy}, ${p.bottomRight + ox} ${p.bottomY + oy}, ${p.topRight + ox} ${p.topY + oy}
+           L ${p.topRight + ox} ${oy} Z`;
         svgPathRef.current.setAttribute('d', d);
 
         // 3. Draw the Animated Border
@@ -79,6 +91,7 @@ const AnimatedHeader = () => {
         grd.addColorStop(0.8, "rgba(52, 211, 153, 0.8)");
         grd.addColorStop(1, "rgba(255, 255, 255, 0)");
 
+        // if(window.innerWidth < 768)return;
         ctx.strokeStyle = grd;
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -159,6 +172,7 @@ const AnimatedHeader = () => {
         openTL.to(arrowRef.current, { duration: 0.4, height: -7 }, 0.4);
         animationRef.current.tl = tl;
         animationRef.current.openTL = openTL;
+        measureOffsets();
         drawPath();
     };
 
@@ -183,6 +197,13 @@ const AnimatedHeader = () => {
     };
 
     useEffect(() => {
+        themeRef.current = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        drawPath();
+    }, [theme]);
+
+    useEffect(() => {
         setRatio();
         const handleResize = () => setRatio();
         const handlePointerMove = (e) => {
@@ -191,9 +212,12 @@ const AnimatedHeader = () => {
         window.addEventListener('resize', handleResize);
         window.addEventListener('mousemove', handlePointerMove);
         gsap.ticker.add(render);
+        const handleLoad = () => { measureOffsets(); drawPath(); };
+        window.addEventListener('load', handleLoad);
         return () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handlePointerMove);
+            window.removeEventListener('load', handleLoad);
             gsap.ticker.remove(render);
         };
     }, []);
@@ -228,6 +252,20 @@ const AnimatedHeader = () => {
                         </li>
                     ))}
                 </ul>
+                <button
+                    type="button"
+                    className={`theme-toggle${theme === 'dark' ? ' is-dark' : ''}`}
+                    onClick={() => {setTheme(t => (t === 'dark' ? 'light' : 'dark')); console.log('button Them was pushed')}}
+                    aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+                >
+                    <svg className="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg className="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+                </button>
             </nav>
         </header>
     );

@@ -66,3 +66,50 @@
 
   .links
     text-align: center
+
+.theme-toggle
+  position: absolute
+  left: 50%  // was: 50%  (raise or lower 40px to taste)
+  top: 50%
+  z-index: 10
+  pointer-events: auto
+  transform: translate(-50%, -50%)
+  width: 34px
+  height: 34px
+  padding: 0
+  border: 1px solid rgba(128, 128, 128, 0.4)
+  border-radius: 50%
+  background: transparent
+  color: #333
+  cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
+  @media (min-width: 1200px)
+    left: calc(50% + 5px)  // adjust this value to what you need
+
+  svg
+    position: absolute
+    width: 18px
+    height: 18px
+    transition: transform 0.4s ease, opacity 0.3s ease
+
+  .icon-sun
+    opacity: 0
+    transform: rotate(-90deg) scale(0.4)
+
+  &.is-dark
+    color: #e5e7eb
+    .icon-sun
+      opacity: 1
+      transform: none
+    .icon-moon
+      opacity: 0
+      transform: rotate(90deg) scale(0.4)
+
+@media (max-width: 768px)
+  .theme-toggle
+    left: 50%
+    top: auto
+    bottom: 8px
+    transform: translateX(-50%)
