@@ -23,7 +23,7 @@ function AnimatedRoutes() {
                     <Route path="/about" element={<AbouteMe/>}/>
                     <Route path="/contact" element={<ContactMe/>}/>
                     <Route path="/tech-stack" element={<TechStack/>}/>
-
+                    
                     <Route path="*" element={<NotFound404/>}/>
                 </Route>
             </Routes>
